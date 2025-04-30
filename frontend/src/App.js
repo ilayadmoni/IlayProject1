@@ -1,23 +1,17 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Homepage from './pages/Homepage';
+import Header from './header/Header';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-         ניצן המלכה שלי
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='bodystyle'>
+      <Header></Header>
+      <div className='headertextstyle'>
+        ספר מתכונים
+      </div>
+      <Homepage></Homepage>
+      <div>ניסיו2222ן 1</div>
     </div>
   );
 }
