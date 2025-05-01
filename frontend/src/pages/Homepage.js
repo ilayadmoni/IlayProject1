@@ -3,7 +3,7 @@
 function Homepage() {
   return (
    
-    <div> this will be the cards components</div>
+    <div> כאן יהיה  מוצג כל הכרטיסיות של המתכונים</div>
   )
 }
 

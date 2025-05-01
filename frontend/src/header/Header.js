@@ -5,27 +5,30 @@ import { borderColor, boxSizing, fontFamily, fontSize, gap, minWidth } from '@mu
 
 
 const buttonstyle  = {
-    bgcolor: '#D2B48C',
-    color: 'black',
+    bgcolor: '#84592B',
+    color: '#E8D1A7',
     height: '60px',
     minWidth: '120px',
-    fontSize: '1.5rem',
+    fontSize: '1.3rem',
     padding: '12px 24px',
     border: '1px solid #BFA6A0', // מסגרת חומה כהה
     borderRadius: '12px',
-    fontFamily: 'Arial'
+    fontFamily: 'Myfont'
 
     
 };
 
 
-function Header() {
+function Header({handleOnClick}) {
+
+ 
     return (
      
       <div className="headerstyle">
         <Button
         startIcon={<MenuBookIcon  />}
         sx = {buttonstyle}
+        onClick={handleOnClick}
       >הוסף מתכון
         
         </Button>
