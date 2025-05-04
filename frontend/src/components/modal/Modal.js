@@ -6,15 +6,33 @@ import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';;
 
 const styleBox = {
-  position: 'relative',
-  top: '50%',
+  position: 'absolute',
+  top: '50px',            
   left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '80%',
-  bgcolor: '#743014',
-  border: '1px solid #FFF3E0',
+  transform: 'translateX(-50%)',
+  width: '60%',
+  bgcolor: '#84592b',
+  border: '3px solid #442d1c',
   boxShadow: 24,
   borderRadius: '12px',
+  minHeight: '300px',    
+  maxHeight: 'calc(100vh - 80px)', 
+  overflowY: 'auto',   
+  '&::-webkit-scrollbar': {
+    width: '12px',
+  },
+  '&::-webkit-scrollbar-track': {
+    background: '#e8d1a7',
+    borderRadius: '6px',
+  },
+  '&::-webkit-scrollbar-thumb': {
+    backgroundColor: '#442d1c',
+    borderRadius: '6px',
+    border: '3px solid #e8d1a7',
+  },
+  '&::-webkit-scrollbar-thumb:hover': {
+    backgroundColor: '#6b3c1f',
+  },  
 };
 
 const buttonclosestyle = {
@@ -23,12 +41,13 @@ const buttonclosestyle = {
   left: '10px',          // distance from left
   bgcolor: '#e8d1a7',
   color: '#442d1c',
+  border: '3px solid #442d1c',
   minWidth: '50px',      // fix typo: "minwidth" → "minWidth"
   height: '50px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  border: '1px solid #BFA6A0',
+  
   borderRadius: '12px',
   boxShadow: 24,
 };

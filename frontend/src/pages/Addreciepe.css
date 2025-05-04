@@ -16,11 +16,26 @@
 }
 .rowstyleAddreciepe {
     display: flex;
+   
     color: #e8d1a7;
     flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 2%;
+    
+}
+.rowstyleAddreciepeheader {
+    display: flex;
+    
     justify-content: space-around;
     align-items: center;
     width: 100%;
     padding: 2%;
     
+}
+
+.rowtextstyleAddreciepe {
+    font-size: 20px;
+
 }
