@@ -6,34 +6,32 @@ import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';;
 
 const styleBox = {
-  position: 'absolute',
+  position: 'relative',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: '80%',
-  bgcolor: '#9D9167',
+  bgcolor: '#743014',
   border: '1px solid #FFF3E0',
   boxShadow: 24,
-  p: 5,
   borderRadius: '12px',
-  fontFamily: 'Arial'
 };
 
 const buttonclosestyle = {
-    bgcolor: '#84592b',
-    color: '#e8D1a7',
-    transform: 'translate(-90%, -50%)',
-    left: '3%',
-    minwidth: '80px',
-    height: '60px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    border: '1px solid #BFA6A0',
-    borderRadius: '12px',
-    boxShadow: 24
-
-}
+  position: 'absolute',  // Add this
+  top: '10px',           // distance from top
+  left: '10px',          // distance from left
+  bgcolor: '#e8d1a7',
+  color: '#442d1c',
+  minWidth: '50px',      // fix typo: "minwidth" → "minWidth"
+  height: '50px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  border: '1px solid #BFA6A0',
+  borderRadius: '12px',
+  boxShadow: 24,
+};
 
 export default function ModalBox({open,setOpen,BodyFunction}) {
   const handleClose = () => setOpen(false);

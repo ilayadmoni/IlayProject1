@@ -1,0 +1,26 @@
+.bodystyle {
+    display: flex;
+    flex-direction: column;
+    width: 70%; 
+    align-items: center;
+    justify-content: flex-start;
+    margin: auto;
+    padding: 2%;
+  }
+
+.headerstyleAddreciepe {
+    font-size: 50px;
+    color: #e8d1a7;
+    padding: 1%;
+
+}
+.rowstyleAddreciepe {
+    display: flex;
+    color: #e8d1a7;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 2%;
+    
+}

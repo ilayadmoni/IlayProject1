@@ -5,7 +5,7 @@ import { borderColor, boxSizing, fontFamily, fontSize, gap, minWidth } from '@mu
 
 
 const buttonstyle  = {
-    bgcolor: '#84592B',
+    bgcolor: '#743014',
     color: '#E8D1A7',
     height: '60px',
     minWidth: '120px',

@@ -16,7 +16,7 @@ function App() {
 
 
   return (
-    <div className='bodystyle'>
+    <div className='bodystyleheader'>
       <Header handleOnClick={handleOnClickAdd} />
       <div className='headertextstyle'>
         ספר מתכונים
