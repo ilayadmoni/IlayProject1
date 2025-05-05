@@ -34,8 +34,17 @@
     padding: 2%;
     
 }
-
 .rowtextstyleAddreciepe {
-    font-size: 20px;
+    font-size: 30px;
+    padding-top: 2%;
+    color: #e8d1a7;
+}
 
+.rowbuttonstyleAddreciepe {
+    display: flex;               /* Enable flexbox */
+    justify-content: center;     /* Horizontal centering */
+    align-items: center;         /* Vertical centering */
+    padding: 1%;
+    width: 95%;
+    margin: auto;
 }

@@ -3,7 +3,7 @@ import './App.css';
 import Homepage from './pages/Homepage';
 import Header from './header/Header';
 import ModalBox from './components/modal/Modal';
-import Addreciepe from './pages/Addreciepe';
+import Addreciepe from './pages/Addreciepe/Addreciepe';
 import * as React from 'react';
 
 function App() {
