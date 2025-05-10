@@ -10,6 +10,7 @@ import {
   stylebuttonfieldfile,
   VisuallyHiddenInput
 } from './AddreciepeStyle';
+import axios from 'axios';
 
 function Addreciepe() {
 
@@ -18,6 +19,37 @@ const [foodSupplies, setFoodSupplies] = useState('');
 const [orderReciepe, setOrderReciepe] = useState('');
 const [pictureOfReciepe, setPictureOfReciepe] = useState(null);
 
+const uploadRecipe = async () => {
+  if (!reciepeName || !foodSupplies || !orderReciepe || !pictureOfReciepe) {
+    alert("נא למלא את כל השדות ולהעלות תמונה");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("ReciepeName", reciepeName);
+  formData.append("FoodSupplies", foodSupplies);
+  formData.append("OrderReciepe", orderReciepe);
+  formData.append("PictureOfReciepe", pictureOfReciepe);
+
+  try {
+    const response = await axios.post("http://localhost:3000/api/reciepes", formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data', // This is handled automatically by axios but it's good to explicitly mention it
+      },
+    });
+
+    console.log("Success:", response.data);
+    alert("המתכון הועלה בהצלחה!");
+    // Optional: reset form
+    setReciepeName('');
+    setFoodSupplies('');
+    setOrderReciepe('');
+    setPictureOfReciepe(null);
+  } catch (error) {
+    console.error("Error:", error);
+    alert("שגיאה בשליחת המתכון לשרת.");
+  }
+};
 
  
     return (
@@ -66,11 +98,13 @@ const [pictureOfReciepe, setPictureOfReciepe] = useState(null);
         variant="contained"
         tabIndex={-1}
       
-        >הוסף קובץ 
+        >    {pictureOfReciepe ? "שנה קובץ" : "הוסף קובץ"}
            <VisuallyHiddenInput
         type="file"
+        accept="image/png"
         onChange={(event) => {
           const file = event.target.files[0];
+          console.log(file);
           if (file) setPictureOfReciepe(file);
         }}
         
@@ -81,17 +115,7 @@ const [pictureOfReciepe, setPictureOfReciepe] = useState(null);
         <Button
         sx={stylebuttonfieldfile}
         startIcon={<CheckCircleIcon/>}
-        onClick={() => {
-          const recipeObject = {
-            ReciepeName: reciepeName,
-            FoodSupplies: foodSupplies,
-            OrderReciepe: orderReciepe,
-            PictureOfReciepe: pictureOfReciepe,
-          };
-          console.log(recipeObject);
-          // send this object to backend or handle it as needed
-        }}
-        
+        onClick={uploadRecipe}
         >שליחת מתכון</Button>
         </div>
        
