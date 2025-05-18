@@ -54,37 +54,31 @@ def index():
 def static_proxy(path):
     return app.send_static_file(path)
 
-UPLOAD_FOLDER = './uploads'
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
-
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-@app.route("/api/reciepes", methods=["POST"])
-def upload_reciepe():
-    reciepe_name = request.form.get("ReciepeName")
-    food_supplies = request.form.get("FoodSupplies")
-    order_reciepe = request.form.get("OrderReciepe")
-    image_file = request.files.get("PictureOfReciepe")
-
-    reciepe_object = {
-        "ReciepeName": reciepe_name,
-        "FoodSupplies": food_supplies,
-        "OrderReciepe": order_reciepe
-    }
-
-
-    inserted_id = Mongo.add_reciepe_with_file(reciepe_object, image_file)
-
-    # Print the whole object as JSON-like
-    print(reciepe_object)
-
-    return jsonify({"message": "Received", "data": reciepe_object}), 200
-
 
     
-
- 
+@app.route('/api/reciepestest', methods=['POST', 'OPTIONS'])
+@handle_cors
+@cross_origin(supports_credentials=True)
+def handle_reciepestest():
+    if request.method == 'POST':
+        data =request.json 
+        print("the data recieve:")
+        print(data['reciepeName'])        
+        return jsonify({'message': 'Data received successfully'})
+    elif request.method == 'OPTIONS':
+        print("hhh")
+        # Respond to the preflight request
+        response = app.response_class(
+            response='',
+            status=200,
+            headers={
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'POST',
+                'Access-Control-Allow-Headers': 'Content-Type',
+            }
+        )
+        return response    
+    
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=3000, debug=True)

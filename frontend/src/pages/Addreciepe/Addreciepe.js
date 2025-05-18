@@ -12,6 +12,11 @@ import {
 } from './AddreciepeStyle';
 import axios from 'axios';
 
+
+
+
+
+
 function Addreciepe() {
 
 const [reciepeName, setReciepeName] = useState('');
@@ -19,11 +24,14 @@ const [foodSupplies, setFoodSupplies] = useState('');
 const [orderReciepe, setOrderReciepe] = useState('');
 const [pictureOfReciepe, setPictureOfReciepe] = useState(null);
 
+
+/*  
 const uploadRecipe = async () => {
   if (!reciepeName || !foodSupplies || !orderReciepe || !pictureOfReciepe) {
     alert("נא למלא את כל השדות ולהעלות תמונה");
     return;
   }
+
 
   const formData = new FormData();
   formData.append("ReciepeName", reciepeName);
@@ -49,6 +57,26 @@ const uploadRecipe = async () => {
     console.error("Error:", error);
     alert("שגיאה בשליחת המתכון לשרת.");
   }
+};
+*/
+
+
+
+
+function submitReciepe() {
+  console.log(reciepeName);
+
+  axios.post("http://localhost:3000/api/reciepestest", { reciepeName,foodSupplies,orderReciepe }, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  .then(response => {
+    console.log("Response from backend:", response.data);
+  })
+  .catch(error => {
+    console.error("Error from backend:", error.response?.data || error.message);
+  });
 };
 
  
@@ -115,7 +143,7 @@ const uploadRecipe = async () => {
         <Button
         sx={stylebuttonfieldfile}
         startIcon={<CheckCircleIcon/>}
-        onClick={uploadRecipe}
+        onClick={() => submitReciepe()}
         >שליחת מתכון</Button>
         </div>
        
