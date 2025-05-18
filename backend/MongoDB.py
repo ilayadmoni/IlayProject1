@@ -1,6 +1,8 @@
 
 import pymongo
 import gridfs
+import io
+from bson import ObjectId
 
 
 class DB_Mongo:
@@ -8,11 +10,12 @@ class DB_Mongo:
     db_name = "ReciepeWebsite"
     collection_name = "Reciepe"
     uri = "mongodb://localhost:27017/"
+    
 
     def __init__(self):
         self.client = pymongo.MongoClient(self.uri)
         self.db = self.client[self.db_name]
-        self.fs = gridfs.GridFS(self.db)
+        self.fs = gridfs.GridFS(self.db ,collection="image_collection")
         self.reciepe_collection = self.db[self.collection_name]
         
 
@@ -38,7 +41,6 @@ class DB_Mongo:
 
 
     def add_reciepe_with_file(self, reciepeObject, file_storage):
- 
         if file_storage:
             image_id = self.fs.put(file_storage, filename=file_storage.filename, content_type=file_storage.content_type)
             reciepeObject["PictureOfReciepe"] = {
@@ -47,18 +49,48 @@ class DB_Mongo:
                 "gridfs_id": image_id
             }
         else:
-            reciepeObject["PictureOfReciepe"] = None
-            
-            
+            reciepeObject["PictureOfReciepe"] = None 
         print(reciepeObject)
-
         result = self.reciepe_collection.insert_one(reciepeObject)
         return str(result.inserted_id)
+    
+    def add_image_to_db(self , image_file):
+        file_id = self.fs.put(
+            image_file,  # this is your FileStorage object
+            filename=image_file.filename,
+            content_type=image_file.content_type
+        )
+        metadata_image = {
+        "filename": image_file.filename,
+        "contentType": image_file.content_type,
+        "size": image_file.content_length,
+        "gridfs_file_id": file_id  }
+    
+        result = self.reciepe_collection.insert_one(metadata_image)
+        return file_id 
+    
+    def get_image_from_db(self, image_id):
+        try:
+            file = self.fs.get(ObjectId(image_id))
+            return file
+        except Exception as e:
+            print(f"Error retrieving image from DB: {e}")
+            return None
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
             
  
-#test = DB_Mongo()
-#test.create_reciepe_db_if_not_exists()
+test = DB_Mongo()
+a = (test.get_image_from_db('682a19fab36f599331451921'))
+print(a)
 #test.create_reciepe_db_if_not_exists()
 #object = {"name": "fffff" , "age": "24"}
 #object1 = {

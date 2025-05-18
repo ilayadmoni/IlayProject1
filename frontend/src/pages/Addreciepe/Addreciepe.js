@@ -61,7 +61,7 @@ const uploadRecipe = async () => {
 */
 
 
-
+console.log(typeof(pictureOfReciepe));
 
 function submitReciepe() {
   console.log(reciepeName);
@@ -78,6 +78,31 @@ function submitReciepe() {
     console.error("Error from backend:", error.response?.data || error.message);
   });
 };
+
+  const handleSubmitpicture = async (event) => {
+    event.preventDefault();
+    if (!pictureOfReciepe) {
+      alert('No PNG file selected.');
+      return;
+    }
+    const formData = new FormData();
+    formData.append('image', pictureOfReciepe); // 'image' is the field name expected by the backend
+    try {
+      const response = await axios.post('http://localhost:3000/api/reciepestestpicture', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      alert('Image uploaded successfully!');
+    } catch (error) {
+      console.error('Upload failed:', error.response?.data || error.message);
+      alert('Upload failed');
+    }
+  };
+
+
+
+
 
  
     return (
@@ -143,12 +168,13 @@ function submitReciepe() {
         <Button
         sx={stylebuttonfieldfile}
         startIcon={<CheckCircleIcon/>}
-        onClick={() => submitReciepe()}
+        onClick={handleSubmitpicture}
         >שליחת מתכון</Button>
         </div>
        
       </div>
-    )
-  }
+    )};
+
+  
   export default Addreciepe;
      
