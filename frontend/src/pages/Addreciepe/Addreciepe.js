@@ -17,7 +17,8 @@ import axios from 'axios';
 
 
 
-function Addreciepe() {
+
+function Addreciepe({setModalopen,setSnackbar}) {
 
 const [reciepeName, setReciepeName] = useState('');
 const [foodSupplies, setFoodSupplies] = useState('');
@@ -25,86 +26,34 @@ const [orderReciepe, setOrderReciepe] = useState('');
 const [pictureOfReciepe, setPictureOfReciepe] = useState(null);
 
 
-/*  
-const uploadRecipe = async () => {
-  if (!reciepeName || !foodSupplies || !orderReciepe || !pictureOfReciepe) {
-    alert("נא למלא את כל השדות ולהעלות תמונה");
-    return;
-  }
-
-
-  const formData = new FormData();
-  formData.append("ReciepeName", reciepeName);
-  formData.append("FoodSupplies", foodSupplies);
-  formData.append("OrderReciepe", orderReciepe);
-  formData.append("PictureOfReciepe", pictureOfReciepe);
-
-  try {
-    const response = await axios.post("http://localhost:3000/api/reciepes", formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data', // This is handled automatically by axios but it's good to explicitly mention it
-      },
-    });
-
-    console.log("Success:", response.data);
-    alert("המתכון הועלה בהצלחה!");
-    // Optional: reset form
-    setReciepeName('');
-    setFoodSupplies('');
-    setOrderReciepe('');
-    setPictureOfReciepe(null);
-  } catch (error) {
-    console.error("Error:", error);
-    alert("שגיאה בשליחת המתכון לשרת.");
-  }
-};
-*/
-
-
-console.log(typeof(pictureOfReciepe));
-
-function submitReciepe() {
-  console.log(reciepeName);
-
-  axios.post("http://localhost:3000/api/reciepestest", { reciepeName,foodSupplies,orderReciepe }, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-  .then(response => {
-    console.log("Response from backend:", response.data);
-  })
-  .catch(error => {
-    console.error("Error from backend:", error.response?.data || error.message);
-  });
-};
 
   const handleSubmitpicture = async (event) => {
     event.preventDefault();
-    if (!pictureOfReciepe) {
-      alert('No PNG file selected.');
+    if (!pictureOfReciepe || !reciepeName || !foodSupplies || !orderReciepe ) {
+      setSnackbar('אנא מלא את כל הפרטים', 'warning');
       return;
     }
     const formData = new FormData();
-    formData.append('image', pictureOfReciepe); // 'image' is the field name expected by the backend
+    formData.append('image', pictureOfReciepe);
+    formData.append("ReciepeName", reciepeName);
+    formData.append("FoodSupplies", foodSupplies);
+    formData.append("OrderReciepe", orderReciepe);
+     
     try {
-      const response = await axios.post('http://localhost:3000/api/reciepestestpicture', formData, {
+      const response = await axios.post('http://localhost:3000/postreciepe', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      alert('Image uploaded successfully!');
+      setModalopen(false);
+      setSnackbar('המתכון נשלח בהצלחה', 'success');
     } catch (error) {
       console.error('Upload failed:', error.response?.data || error.message);
-      alert('Upload failed');
+      setModalopen(false);
+      setSnackbar('תקלה! קיימת בעיית חיבור לשרת', 'error');
+      
     }
   };
-
-
-
-
-
- 
     return (
      
       <div className="bodystyle">
@@ -154,10 +103,8 @@ function submitReciepe() {
         >    {pictureOfReciepe ? "שנה קובץ" : "הוסף קובץ"}
            <VisuallyHiddenInput
         type="file"
-        accept="image/png"
         onChange={(event) => {
           const file = event.target.files[0];
-          console.log(file);
           if (file) setPictureOfReciepe(file);
         }}
         
@@ -171,6 +118,9 @@ function submitReciepe() {
         onClick={handleSubmitpicture}
         >שליחת מתכון</Button>
         </div>
+
+
+        
        
       </div>
     )};

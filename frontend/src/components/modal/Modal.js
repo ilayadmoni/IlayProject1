@@ -76,7 +76,7 @@ export default function ModalBox({open,setOpen,BodyFunction}) {
            >
             <CloseIcon/>
             </Button>
-            <BodyFunction/>
+            {BodyFunction}
           </Box>
         
       </Modal>
