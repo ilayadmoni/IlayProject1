@@ -38,7 +38,6 @@ class DB_Mongo:
                 print("The DB and the Collection Reciepe are already existed")    
         
        
-    
     #Function for display the image through API
     def get_image_from_db(self, ImageId):
         try:
@@ -56,7 +55,6 @@ class DB_Mongo:
             filename=ImageFile.filename,
             content_type=ImageFile.content_type
         )
-
         MetadataReciepe = {
             'ReciepeName': ReciepeDetails[0],
             'FoodSupplies': ReciepeDetails[1],
@@ -65,8 +63,17 @@ class DB_Mongo:
         }
         ResultReciepe = self.ReciepeCollection.insert_one(MetadataReciepe)
         
+    #Function which return list with all the reciepe details
+    def get_all_recipe_from_db(self):
+        
+        ReciepeList = list(self.ReciepeCollection.find())
+        for item in ReciepeList:
+            item['_id'] = str(item['_id']) 
+            item['ImageId'] = str(item['ImageId'])
+        return ReciepeList
         
         
 Mongo = DB_Mongo()
-Mongo.create_ReciepeDB_if_not_exists()
+a= Mongo.get_all_recipe_from_db()        
+print(a)
         

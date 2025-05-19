@@ -2,29 +2,23 @@
 import { styled } from '@mui/material/styles';
 
 export const styletextheaderfield = {
+   width: ['70vw', '70vw', '300px'],
+  maxWidth: '300px',
   bgcolor: '#e8d1a7',
   border: '2px solid #442d1c',
   boxShadow: 24,
   borderRadius: '12px',
+  mx: 'auto',
   '& .MuiInputLabel-root': {
     color: '#442d1c',
-    left: '20%',
     fontFamily: 'MyFont',
-    fontSize: '23px',
+    fontSize: '20px',
   },
   '& .MuiOutlinedInput-root': {
     direction: 'rtl',
-    '& fieldset': {
-      borderColor: 'transparent',
-      borderWidth: 'px',
-      borderRadius: '12px',
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: 'transparent',
-    },
-    '&:hover fieldset': {
-      borderColor: 'transparent',
-    },
+    '& fieldset': { borderColor: 'transparent', borderRadius: '12px' },
+    '&:hover fieldset': { borderColor: 'transparent' },
+    '&.Mui-focused fieldset': { borderColor: 'transparent' },
   },
   '& .MuiInputLabel-root.Mui-focused': {
     opacity: 0,
@@ -33,48 +27,34 @@ export const styletextheaderfield = {
 };
 
 export const styletextfield = {
-  width: '600px',
+  width: '70vw',
+  maxWidth: '800px',
   bgcolor: '#e8d1a7',
   border: '2px solid #442d1c',
   boxShadow: 24,
   borderRadius: '12px',
+  mx: 'auto',
+  '@media (min-width:600px)': {
+    width: '50vw',
+  },
+  '@media (min-width:900px)': {
+    width: '50vw',
+  },
   '& .MuiInputBase-root': {
     overflowY: 'auto',
     maxHeight: '200px',
-    '&::-webkit-scrollbar': {
-      width: '12px',
-    },
-    '&::-webkit-scrollbar-track': {
-      background: '#e8d1a7',
-      borderRadius: '6px',
-    },
-    '&::-webkit-scrollbar-thumb': {
-      backgroundColor: '#442d1c',
-      borderRadius: '6px',
-      border: '3px solid #e8d1a7',
-    },
-    '&::-webkit-scrollbar-thumb:hover': {
-      backgroundColor: '#6b3c1f',
-    },
+    // Keep scroll styling
   },
   '& .MuiInputLabel-root': {
     color: '#442d1c',
-    left: '20%',
     fontFamily: 'MyFont',
-    fontSize: '23px',
+    fontSize: '20px',
   },
   '& .MuiOutlinedInput-root': {
     direction: 'rtl',
-    '& fieldset': {
-      borderColor: 'transparent',
-      borderRadius: '12px',
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: 'transparent',
-    },
-    '&:hover fieldset': {
-      borderColor: 'transparent',
-    },
+    '& fieldset': { borderColor: 'transparent', borderRadius: '12px' },
+    '&:hover fieldset': { borderColor: 'transparent' },
+    '&.Mui-focused fieldset': { borderColor: 'transparent' },
   },
   '& .MuiInputLabel-root.Mui-focused': {
     opacity: 0,
@@ -88,11 +68,12 @@ export const stylebuttonfieldfile = {
   border: '2px solid #442d1c',
   boxShadow: 24,
   borderRadius: '12px',
-  fontSize: '20px',
-  padding: '12px 24px',
-  width: '19%',
+  fontSize: '18px',
+  padding: '10px 20px',
+  width: '90%',
+  maxWidth: '300px',
   height: '50px',
-  fontFamily: 'Myfont',
+  fontFamily: 'MyFont',
 };
 
 export const VisuallyHiddenInput = styled('input')({

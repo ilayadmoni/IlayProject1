@@ -12,20 +12,12 @@ import {
 } from './AddreciepeStyle';
 import axios from 'axios';
 
-
-
-
-
-
-
 function Addreciepe({setModalopen,setSnackbar}) {
 
 const [reciepeName, setReciepeName] = useState('');
 const [foodSupplies, setFoodSupplies] = useState('');
 const [orderReciepe, setOrderReciepe] = useState('');
 const [pictureOfReciepe, setPictureOfReciepe] = useState(null);
-
-
 
   const handleSubmitpicture = async (event) => {
     event.preventDefault();
@@ -100,9 +92,10 @@ const [pictureOfReciepe, setPictureOfReciepe] = useState(null);
         variant="contained"
         tabIndex={-1}
       
-        >    {pictureOfReciepe ? "שנה קובץ" : "הוסף קובץ"}
+        >    {pictureOfReciepe ? pictureOfReciepe.name : "הוסף קובץ"}
            <VisuallyHiddenInput
         type="file"
+        accept="image/*"
         onChange={(event) => {
           const file = event.target.files[0];
           if (file) setPictureOfReciepe(file);
@@ -118,6 +111,7 @@ const [pictureOfReciepe, setPictureOfReciepe] = useState(null);
         onClick={handleSubmitpicture}
         >שליחת מתכון</Button>
         </div>
+        <div className='rowbuttonstyleAddreciepebottom'/>
 
 
         

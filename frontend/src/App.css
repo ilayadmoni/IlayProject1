@@ -25,10 +25,25 @@ body {
 .headertextstyle {
   padding: 30px;
   text-align: center;
-
-  font-size: 5rem; /* Adjust font size for responsiveness */
+  font-size: 5rem; /* Desktop size */
   color: #442D1C;
   font-family: 'MyFont';
   display: flex;
-  justify-content: center; /* Center the content inside the header */
+  justify-content: center;
+}
+
+/* Medium screens (tablets) */
+@media (max-width: 1024px) {
+  .headertextstyle {
+    font-size: 3.5rem;
+    padding: 20px;
+  }
+}
+
+/* Small screens (mobile) */
+@media (max-width: 600px) {
+  .headertextstyle {
+    font-size: 3rem;
+    padding: 15px;
+  }
 }

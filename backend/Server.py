@@ -3,7 +3,6 @@ from flask_cors import CORS, cross_origin
 from flask import Flask, request, Response, jsonify,send_file
 from flask_socketio import SocketIO
 import io
-from werkzeug.utils import secure_filename
 from MongoDB import DB_Mongo
 
 app = Flask(__name__, static_folder="./frontend/dist")
@@ -49,6 +48,17 @@ def index():
 @cross_origin(supports_credentials=True)
 def static_proxy(path):
     return app.send_static_file(path)
+
+#Get api for giving list with all reciepes details
+@app.route('/api/reciepes', methods=['GET'])
+@handle_cors
+@cross_origin(supports_credentials=True)
+def getReciepes():
+    try:
+        return Mongo.get_all_recipe_from_db()
+        
+    except Exception as e:
+        return {"error": str(e)}, 500
 
 
 #Get api for posting image in client page from MongoDb

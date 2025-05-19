@@ -7,17 +7,19 @@ import CloseIcon from '@mui/icons-material/Close';;
 
 const styleBox = {
   position: 'absolute',
-  top: '50px',            
+  top: '40px',
   left: '50%',
   transform: 'translateX(-50%)',
-  width: '60%',
+  width: '80vw',
   bgcolor: '#84592b',
   border: '3px solid #442d1c',
   boxShadow: 24,
-  borderRadius: '12px',
-  minHeight: '300px',    
-  maxHeight: 'calc(100vh - 80px)', 
-  overflowY: 'auto',   
+  borderRadius: '10px',
+  minHeight: '300px',
+  maxHeight: 'calc(100vh - 100px)',
+  overflowY: 'auto',
+  padding: '10px',
+
   '&::-webkit-scrollbar': {
     width: '12px',
   },
@@ -32,24 +34,34 @@ const styleBox = {
   },
   '&::-webkit-scrollbar-thumb:hover': {
     backgroundColor: '#6b3c1f',
-  },  
+  },
+
+  // ✅ Mobile-specific padding
+  '@media (max-width:600px)': {
+    paddingBottom: '12px', // Adjust as needed
+  },
 };
 
+
 const buttonclosestyle = {
-  position: 'absolute',  // Add this
-  top: '10px',           // distance from top
-  left: '10px',          // distance from left
+  position: 'absolute',
+  top: '10px',
+  left: '10px',
   bgcolor: '#e8d1a7',
   color: '#442d1c',
   border: '3px solid #442d1c',
-  minWidth: '50px',      // fix typo: "minwidth" → "minWidth"
-  height: '50px',
+  minWidth: '40px',
+  height: '40px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  
   borderRadius: '12px',
   boxShadow: 24,
+  padding: 0,
+  '@media (max-width:480px)': {
+    minWidth: '36px',
+    height: '36px',
+  },
 };
 
 export default function ModalBox({open,setOpen,BodyFunction}) {
