@@ -32,7 +32,7 @@ const [pictureOfReciepe, setPictureOfReciepe] = useState(null);
     formData.append("OrderReciepe", orderReciepe);
      
     try {
-      const response = await axios.post('http://localhost:3000/postreciepe', formData, {
+      const response = await axios.post('http://192.168.66.135:3000/postreciepe', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

@@ -1,9 +1,18 @@
-
+import './Homepage.css';
+import CardComponent from '../components/card/Card.js'
 
 function Homepage() {
   return (
    
-    <div> כאן יהיה  מוצג כל הכרטיסיות של המתכונים</div>
+    <div className="homepagestyle"> 
+    <CardComponent/>
+    <CardComponent/>
+    <CardComponent/>
+    <CardComponent/>
+    <CardComponent/>
+    
+    
+   </div>
   )
 }
 
