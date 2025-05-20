@@ -30,6 +30,7 @@ const [pictureOfRecipe, setPictureOfRecipe] = useState(null);
     formData.append("RecipeName", recipeName);
     formData.append("FoodSupplies", foodSupplies);
     formData.append("OrderRecipe", orderRecipe);
+    console.log('formData', formData);
      
     try {
       const response = await axios.post(`${ipServer}/postrecipe`,formData, {

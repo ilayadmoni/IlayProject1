@@ -38,7 +38,12 @@ const styleBox = {
 
   // ✅ Mobile-specific padding
   '@media (max-width:600px)': {
-    paddingBottom: '12px', // Adjust as needed
+    paddingBottom: '12px',
+    minHeight: '60vh', // Make the modal box higher
+    top: '10px',
+    bottom: '20px', // Move the box up from the bottom of the screen
+    transform: 'translateX(-50%)',
+    maxHeight: 'calc(100vh - 60px)',
   },
 };
 

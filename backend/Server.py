@@ -6,7 +6,7 @@ import io
 from MongoDB import DB_Mongo
 
 app = Flask(__name__, static_folder="./frontend/dist")
-CORS(app,origins=['http://0.0.0.0', 'http://localhost'])
+CORS(app, origins=['*'])  # Allow all origins
 socketio = SocketIO(app)
 Mongo = DB_Mongo()
    

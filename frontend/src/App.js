@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import Homepage from './pages/Homepage';
+import Homepage from './pages/Homepage/Homepage';
 import Header from './header/Header';
 import ModalBox from './components/modal/Modal';
 import Addrecipe from './pages/Addrecipe/Addreciepe';
@@ -9,7 +9,7 @@ import Alert from '@mui/material/Alert';
 import axios from 'axios';
 
 
-let IPServer = 'http://10.100.102.8:3000';
+let IPServer = 'http://10.100.102.7:3000';
 
 function App() {
    const [openAddRecipe, setOpenAddRecipe] = useState(false);
@@ -75,7 +75,7 @@ function App() {
      variant="filled"
      sx={{
        width: '100%',
-       fontFamily:  'Myfont' 
+       fontFamily: 'Myfont' 
      }}
    >
      {snackbar.message}

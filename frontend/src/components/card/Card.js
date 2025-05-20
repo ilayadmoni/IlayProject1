@@ -37,18 +37,14 @@ const loadingRecipe = {
   _id: 'loading'
 };
 
-export default function CardComponent({ recipe, IPServer, onCardClick }) {
+export default function CardComponent({ recipe, IPServer,handleCardClick}) {
   const displayRecipe = recipe || loadingRecipe;
 
   useEffect(() => {
     console.log('displayRecipe updated:', displayRecipe);
   }, [displayRecipe]);
 
-  const handleCardClick = () => {
-    if (onCardClick) {
-      onCardClick(displayRecipe._id);
-    }
-  };
+ 
 
   return (
     <Card sx={styleCard}>
