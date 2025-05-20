@@ -49,11 +49,11 @@ def index():
 def static_proxy(path):
     return app.send_static_file(path)
 
-#Get api for giving list with all reciepes details
-@app.route('/api/reciepes', methods=['GET'])
+#Get api for giving list with all recipes details
+@app.route('/api/recipes', methods=['GET'])
 @handle_cors
 @cross_origin(supports_credentials=True)
-def getReciepes():
+def getRecipes():
     try:
         return Mongo.get_all_recipe_from_db()
         
@@ -82,18 +82,18 @@ def getImage(ImageId):
         return {"error": str(e)}, 500
 
 #Collection data from Client and post on MongoDB
-@app.route('/postreciepe', methods=['POST', 'OPTIONS'])
+@app.route('/postrecipe', methods=['POST', 'OPTIONS'])
 @handle_cors
 @cross_origin(supports_credentials=True)
-def handle_ReciepePost():
+def handle_RecipePost():
     if request.method == 'POST':
         
         #Collection data from Client
-        ReciepeDetails = [request.form.get('ReciepeName'),request.form.get('FoodSupplies'),request.form.get('OrderReciepe')]
+        RecipeDetails = [request.form.get('RecipeName'),request.form.get('FoodSupplies'),request.form.get('OrderRecipe')]
         ImageFile = request.files.get('image') 
         
-        #Adding Reciepe to MongoDB
-        Mongo.add_reciepe_to_db(ReciepeDetails , ImageFile)
+        #Adding Recipe to MongoDB
+        Mongo.add_recipe_to_db(RecipeDetails , ImageFile)
         
         # Return success JSON
         return jsonify({'message': 'Image received successfully', 'filename': ImageFile.filename})
@@ -110,7 +110,7 @@ def handle_ReciepePost():
          )
     return response  
     
-Mongo.create_ReciepeDB_if_not_exists()
+Mongo.create_RecipeDB_if_not_exists()
 if __name__ == '__main__':
    
     app.run(host="0.0.0.0", port=3000, debug=True)

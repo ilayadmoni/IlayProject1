@@ -1,0 +1,16 @@
+.ReciepeNamestyle {
+    font-family: 'MyFont', 'My-font', sans-serif;
+    font-size: 50px;
+    color: #e8d1a7;
+    text-align: center;
+ /* Pushes the text to the bottom */
+    margin-bottom: 0;
+    width: 100%;
+}
+
+/* Responsive styles for mobile */
+@media (max-width: 600px) {
+    .ReciepeNamestyle {
+        font-size: 20px;
+    }
+}

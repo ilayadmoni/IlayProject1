@@ -6,8 +6,8 @@ from bson import ObjectId
 
 class DB_Mongo:
     # Static variables for database name, collection name, and Uri
-    DBName = "ReciepeWebsite"
-    CollectionName = "Reciepe"
+    DBName = "RecipeWebsite"
+    CollectionName = "Recipe"
     Uri = "mongodb://localhost:27017/"
     
 
@@ -15,27 +15,27 @@ class DB_Mongo:
         self.client = pymongo.MongoClient(self.Uri)
         self.db = self.client[self.DBName]
         self.fs = gridfs.GridFS(self.db ,collection="image_collection")
-        self.ReciepeCollection = self.db[self.CollectionName]
+        self.RecipeCollection = self.db[self.CollectionName]
         
 
     #Function which create db and collection if not exist 
-    def create_ReciepeDB_if_not_exists(self):
+    def create_RecipeDB_if_not_exists(self):
         db_list = self.client.list_database_names()
         if self.DBName not in db_list:
-            ReciepeDB = self.db
-            ReciepeCollection = ReciepeDB[self.CollectionName]
+            RecipeDB = self.db
+            RecipeCollection = RecipeDB[self.CollectionName]
             # Create collection by inserting a placeholder document then deleting it
-            ReciepeCollection.insert_one({"_init": True})
-            ReciepeCollection.delete_many({"_init": True})
-            print("Creating ReciepeWebsite DB successfully")
+            RecipeCollection.insert_one({"_init": True})
+            RecipeCollection.delete_many({"_init": True})
+            print("Creating RecipeWebsite DB successfully")
         else:
             # Optional: make sure "reciepe" collection exists
-            ReciepeDB = self.client[self.DBName]
-            if self.CollectionName not in ReciepeDB.list_collection_names():
-                ReciepeDB.create_collection(self.CollectionName)
-                print("Creating Reciepe collection successfully")
+            RecipeDB = self.client[self.DBName]
+            if self.CollectionName not in RecipeDB.list_collection_names():
+                RecipeDB.create_collection(self.CollectionName)
+                print("Creating Recipe collection successfully")
             else:
-                print("The DB and the Collection Reciepe are already existed")    
+                print("The DB and the Collection Recipe are already existed")    
         
        
     #Function for display the image through API
@@ -48,29 +48,29 @@ class DB_Mongo:
             return None
         
     #Function for collection the data from client and store in the MongoDB
-    def add_reciepe_to_db(self, ReciepeDetails, ImageFile): 
+    def add_recipe_to_db(self, RecipeDetails, ImageFile): 
         
         FileId = self.fs.put(
             ImageFile, 
             filename=ImageFile.filename,
             content_type=ImageFile.content_type
         )
-        MetadataReciepe = {
-            'ReciepeName': ReciepeDetails[0],
-            'FoodSupplies': ReciepeDetails[1],
-            'OrderReciepe': ReciepeDetails[2],
+        MetadataRecipe = {
+            'RecipeName': RecipeDetails[0],
+            'FoodSupplies': RecipeDetails[1],
+            'OrderRecipe': RecipeDetails[2],
             'ImageId': FileId  
         }
-        ResultReciepe = self.ReciepeCollection.insert_one(MetadataReciepe)
+        ResultRecipe = self.RecipeCollection.insert_one(MetadataRecipe)
         
     #Function which return list with all the reciepe details
     def get_all_recipe_from_db(self):
         
-        ReciepeList = list(self.ReciepeCollection.find())
-        for item in ReciepeList:
+        RecipeList = list(self.RecipeCollection.find())
+        for item in RecipeList:
             item['_id'] = str(item['_id']) 
             item['ImageId'] = str(item['ImageId'])
-        return ReciepeList
+        return RecipeList
         
         
 Mongo = DB_Mongo()

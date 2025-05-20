@@ -1,13 +1,13 @@
 .homepagestyle {
     width: 98%;
     display: flex;
-    flex-wrap: wrap;         /* Allow wrapping to new lines */
+    flex-wrap: wrap;      
     flex-direction: row;
     gap: 100px;
     font-family: 'My-font';        
 }
 
-/* Responsive styles for mobile devices */
+
 @media (max-width: 600px) {
     .homepagestyle {
         width: 100%;

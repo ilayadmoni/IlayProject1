@@ -1,47 +1,82 @@
-import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
+import './Card.css'
+import React, { useEffect } from 'react';
 
 const styleCard = {
   width: {
-    xs: '30vw',   // mobile
-    sm: '70vw',   // small tablets
-    md: '500px',  // desktops and up
+    xs: '30vw',
+    sm: '70vw',
+    md: '500px',
   },
-    height: {
-    xs: 'auto',     // Let content determine height on mobile
-    sm: 'auto',     // Still flexible for tablets
-    md: '500px',    // Fixed height for desktop
+  height: {
+    xs: '35vw',
+    sm: '80vw',
+    md: '500px',
   },
   maxWidth: '500px',
-  maxHeight: '500px', 
-  bgcolor: '#9D9167',
+  maxHeight: '500px',
+  bgcolor: '#84592b',
   border: '3px solid #442d1c',
   boxShadow: 24,
   borderRadius: '10px',
   padding: '20px',
-  margin: 'auto'
+  margin: 'auto',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between'
 };
 
+const loadingRecipe = {
+  FoodSupplies: 'loading...',
+  ImageId: '682c4494d2b01a4365182405',
+  OrderRecipe: 'loading...',
+  RecipeName: 'loading...',
+  _id: 'loading'
+};
 
-export default function CardComponent() {
+export default function CardComponent({ recipe, IPServer, onCardClick }) {
+  const displayRecipe = recipe || loadingRecipe;
+
+  useEffect(() => {
+    console.log('displayRecipe updated:', displayRecipe);
+  }, [displayRecipe]);
+
+  const handleCardClick = () => {
+    if (onCardClick) {
+      onCardClick(displayRecipe._id);
+    }
+  };
+
   return (
     <Card sx={styleCard}>
-        
-      <CardActionArea>
+      <CardActionArea
+        onClick={handleCardClick}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          height: '100%',
+          justifyContent: 'space-between',
+        }}
+      >
         <CardMedia
           component="img"
-          image="/Omlet.jpg"
-          
+          image={`${IPServer}/api/image/${displayRecipe.ImageId}`}
+          sx={{ width: '100%', objectFit: 'cover', flex: '0 0 auto' }}
         />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-         
+        <CardContent
+          sx={{
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+            flex: '1 1 auto',
+            padding: '8px 0 0 0'
+          }}
+        >
+          <div className='ReciepeNamestyle'>{displayRecipe.RecipeName}</div>
         </CardContent>
       </CardActionArea>
     </Card>

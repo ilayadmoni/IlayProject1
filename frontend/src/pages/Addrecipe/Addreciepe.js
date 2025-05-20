@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@mui/material';
-import './Addreciepe.css'
+import './Addrecipe.css'
 import TextField from '@mui/material/TextField';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -9,30 +9,30 @@ import {
   styletextfield,
   stylebuttonfieldfile,
   VisuallyHiddenInput
-} from './AddreciepeStyle';
+} from './AddrecipeStyle';
 import axios from 'axios';
 
-function Addreciepe({setModalopen,setSnackbar}) {
+function Addrecipe({setModalopen,setSnackbar , ipServer}) {
 
-const [reciepeName, setReciepeName] = useState('');
+const [recipeName, setRecipeName] = useState('');
 const [foodSupplies, setFoodSupplies] = useState('');
-const [orderReciepe, setOrderReciepe] = useState('');
-const [pictureOfReciepe, setPictureOfReciepe] = useState(null);
+const [orderRecipe, setOrderRecipe] = useState('');
+const [pictureOfRecipe, setPictureOfRecipe] = useState(null);
 
   const handleSubmitpicture = async (event) => {
     event.preventDefault();
-    if (!pictureOfReciepe || !reciepeName || !foodSupplies || !orderReciepe ) {
+    if (!pictureOfRecipe || !recipeName || !foodSupplies || !orderRecipe ) {
       setSnackbar('אנא מלא את כל הפרטים', 'warning');
       return;
     }
     const formData = new FormData();
-    formData.append('image', pictureOfReciepe);
-    formData.append("ReciepeName", reciepeName);
+    formData.append('image', pictureOfRecipe);
+    formData.append("RecipeName", recipeName);
     formData.append("FoodSupplies", foodSupplies);
-    formData.append("OrderReciepe", orderReciepe);
+    formData.append("OrderRecipe", orderRecipe);
      
     try {
-      const response = await axios.post('http://192.168.66.135:3000/postreciepe', formData, {
+      const response = await axios.post(`${ipServer}/postrecipe`,formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -49,16 +49,16 @@ const [pictureOfReciepe, setPictureOfReciepe] = useState(null);
     return (
      
       <div className="bodystyle">
-        <div className='headerstyleAddreciepe'>הוספת מתכון</div>
+        <div className='headerstyleAddrecipe'>הוספת מתכון</div>
       
           <TextField
           sx={styletextheaderfield}
           label="שם המתכון"
-          value={reciepeName}
-          onChange={(e) => setReciepeName(e.target.value)}
+          value={recipeName}
+          onChange={(e) => setRecipeName(e.target.value)}
         />
 
-        <div className='rowtextstyleAddreciepe' >מרכיבים למתכון</div>
+        <div className='rowtextstyleAddrecipe' >מרכיבים למתכון</div>
         <div>
           <TextField
           sx={styletextfield}
@@ -71,19 +71,19 @@ const [pictureOfReciepe, setPictureOfReciepe] = useState(null);
         </div>
 
        
-        <div className='rowtextstyleAddreciepe' >אופן הכנה</div>
+        <div className='rowtextstyleAddrecipe' >אופן הכנה</div>
         <div>
           <TextField
             sx={styletextfield}
             multiline
             minRows={6}
-            value={orderReciepe}
-            onChange={(e) => setOrderReciepe(e.target.value)}
+            value={orderRecipe}
+            onChange={(e) => setOrderRecipe(e.target.value)}
 
         />
         </div>
-        <div className='rowtextstyleAddreciepe' >העלאת תמונה</div>
-        <div className='rowbuttonstyleAddreciepe'>
+        <div className='rowtextstyleAddrecipe' >העלאת תמונה</div>
+        <div className='rowbuttonstyleAddrecipe'>
         <Button
         sx={stylebuttonfieldfile}
         startIcon={<AttachFileIcon/>}
@@ -92,26 +92,26 @@ const [pictureOfReciepe, setPictureOfReciepe] = useState(null);
         variant="contained"
         tabIndex={-1}
       
-        >    {pictureOfReciepe ? pictureOfReciepe.name : "הוסף קובץ"}
+        >    {pictureOfRecipe ? pictureOfRecipe.name : "הוסף קובץ"}
            <VisuallyHiddenInput
         type="file"
         accept="image/*"
         onChange={(event) => {
           const file = event.target.files[0];
-          if (file) setPictureOfReciepe(file);
+          if (file) setPictureOfRecipe(file);
         }}
         
          />
         </Button>
         </div>
-        <div className='rowbuttonstyleAddreciepe'>
+        <div className='rowbuttonstyleAddrecipe'>
         <Button
         sx={stylebuttonfieldfile}
         startIcon={<CheckCircleIcon/>}
         onClick={handleSubmitpicture}
         >שליחת מתכון</Button>
         </div>
-        <div className='rowbuttonstyleAddreciepebottom'/>
+        <div className='rowbuttonstyleAddrecipebottom'/>
 
 
         
@@ -120,5 +120,5 @@ const [pictureOfReciepe, setPictureOfReciepe] = useState(null);
     )};
 
   
-  export default Addreciepe;
+  export default Addrecipe;
      
