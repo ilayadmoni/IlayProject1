@@ -10,7 +10,7 @@ const styleBox = {
   top: '40px',
   left: '50%',
   transform: 'translateX(-50%)',
-  width: '80vw',
+  width: '50vw', // Shrink width on desktop
   bgcolor: '#84592b',
   border: '3px solid #442d1c',
   boxShadow: 24,
@@ -38,6 +38,7 @@ const styleBox = {
 
   // ✅ Mobile-specific padding
   '@media (max-width:600px)': {
+    width: '80vw', // Keep current width on mobile
     paddingBottom: '12px',
     minHeight: '60vh', // Make the modal box higher
     top: '10px',
@@ -49,9 +50,9 @@ const styleBox = {
 
 
 const buttonclosestyle = {
-  position: 'absolute',
-  top: '10px',
-  left: '10px',
+  position: 'sticky',
+  top: 0,
+  left: 0,
   bgcolor: '#e8d1a7',
   color: '#442d1c',
   border: '3px solid #442d1c',
@@ -63,6 +64,7 @@ const buttonclosestyle = {
   borderRadius: '12px',
   boxShadow: 24,
   padding: 0,
+  zIndex: 1100,
   '@media (max-width:480px)': {
     minWidth: '36px',
     height: '36px',

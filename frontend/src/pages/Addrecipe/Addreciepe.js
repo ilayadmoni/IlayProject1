@@ -48,78 +48,59 @@ const [pictureOfRecipe, setPictureOfRecipe] = useState(null);
     }
   };
     return (
-     
-      <div className="bodystyle">
-        <div className='headerstyleAddrecipe'>הוספת מתכון</div>
-      
-          <TextField
-          sx={styletextheaderfield}
-          label="שם המתכון"
-          value={recipeName}
-          onChange={(e) => setRecipeName(e.target.value)}
-        />
-
-        <div className='rowtextstyleAddrecipe' >מרכיבים למתכון</div>
-        <div>
-          <TextField
-          sx={styletextfield}
-          multiline
-          minRows={6}
-          value={foodSupplies}
-          onChange={(e) => setFoodSupplies(e.target.value)}
-         
-        />
-        </div>
-
-       
-        <div className='rowtextstyleAddrecipe' >אופן הכנה</div>
-        <div>
-          <TextField
-            sx={styletextfield}
-            multiline
-            minRows={6}
-            value={orderRecipe}
-            onChange={(e) => setOrderRecipe(e.target.value)}
-
-        />
-        </div>
-        <div className='rowtextstyleAddrecipe' >העלאת תמונה</div>
-        <div className='rowbuttonstyleAddrecipe'>
+    <div className="bodystyle" >
+      <div className='headerstyleAddreciepe'>הוספת מתכון</div>
+      <TextField
+        sx={styletextheaderfield}
+        label="שם המתכון"
+        value={recipeName}
+        onChange={(e) => setRecipeName(e.target.value)}
+      />
+      <div className='rowtextstyleAddrecipe'>מרכיבים למתכון</div>
+      <TextField
+        sx={styletextfield}
+        multiline
+        minRows={6}
+        value={foodSupplies}
+        onChange={(e) => setFoodSupplies(e.target.value)}
+      />
+      <div className='rowtextstyleAddrecipe'>אופן הכנה</div>
+      <TextField
+        sx={styletextfield}
+        multiline
+        minRows={6}
+        value={orderRecipe}
+        onChange={(e) => setOrderRecipe(e.target.value)}
+      />
+      <div className='rowtextstyleAddrecipe'>העלאת תמונה</div>
+      <div>
         <Button
-        sx={stylebuttonfieldfile}
-        startIcon={<AttachFileIcon/>}
-        component="label"
-        role={undefined}
-        variant="contained"
-        tabIndex={-1}
-      
-        >    {pictureOfRecipe ? pictureOfRecipe.name : "הוסף קובץ"}
-           <VisuallyHiddenInput
-        type="file"
-        accept="image/*"
-        onChange={(event) => {
-          const file = event.target.files[0];
-          if (file) setPictureOfRecipe(file);
-        }}
-        
-         />
+          sx={stylebuttonfieldfile}
+          startIcon={<AttachFileIcon />}
+          component="label"
+          role={undefined}
+          variant="contained"
+          tabIndex={-1}
+        >
+          {pictureOfRecipe ? pictureOfRecipe.name : "הוסף קובץ"}
+          <VisuallyHiddenInput
+            type="file"
+            accept="image/*"
+            onChange={event => {
+              const file = event.target.files[0];
+              if (file) setPictureOfRecipe(file);
+            }}
+          />
         </Button>
-        </div>
-        <div className='rowbuttonstyleAddrecipe'>
         <Button
-        sx={stylebuttonfieldfile}
-        startIcon={<CheckCircleIcon/>}
-        onClick={handleSubmitpicture}
+          sx={stylebuttonfieldfile}
+          startIcon={<CheckCircleIcon />}
+          onClick={handleSubmitpicture}
         >שליחת מתכון</Button>
-        </div>
-        <div className='rowbuttonstyleAddrecipebottom'/>
-
-
-        
-       
       </div>
+      <div className='rowbuttonstyleAddrecipebottom' />
+    </div>
     )};
 
   
   export default Addrecipe;
-     

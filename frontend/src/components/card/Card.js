@@ -12,7 +12,7 @@ const styleCard = {
     md: '500px',
   },
   height: {
-    xs: '35vw',
+    xs: '60vw',
     sm: '80vw',
     md: '500px',
   },
@@ -60,7 +60,16 @@ export default function CardComponent({ recipe, IPServer,handleCardClick}) {
         <CardMedia
           component="img"
           image={`${IPServer}/api/image/${displayRecipe.ImageId}`}
-          sx={{ width: '100%', objectFit: 'cover', flex: '0 0 auto' }}
+          sx={{
+            width: '100%',
+            maxWidth: '380px', // Limit the image width
+            height: 'auto',
+            aspectRatio: '1 / 1', // Force square aspect ratio
+            objectFit: 'cover',   // Crop to fill the square
+            flex: '0 0 auto',
+            borderRadius: '10px',
+            alignSelf: 'center', // Center the image horizontally
+          }}
         />
         <CardContent
           sx={{

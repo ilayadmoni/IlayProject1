@@ -2,8 +2,7 @@
 import { styled } from '@mui/material/styles';
 
 export const styletextheaderfield = {
-   width: ['70vw', '70vw', '300px'],
-  maxWidth: '300px',
+   width: ['70vw', '70vw', '400px'],
   bgcolor: '#e8d1a7',
   border: '2px solid #442d1c',
   boxShadow: 24,
@@ -13,6 +12,12 @@ export const styletextheaderfield = {
     color: '#442d1c',
     fontFamily: 'MyFont',
     fontSize: '20px',
+    width: '100%',
+    textAlign: 'center',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    top: '25%',
+    pointerEvents: 'auto',
   },
   '& .MuiOutlinedInput-root': {
     direction: 'rtl',
