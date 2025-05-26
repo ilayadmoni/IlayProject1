@@ -2,7 +2,8 @@
 import { styled } from '@mui/material/styles';
 
 export const styletextheaderfield = {
-   width: ['70vw', '70vw', '400px'],
+  width: ['70vw', '70vw', '400px'],
+  
   bgcolor: '#e8d1a7',
   border: '2px solid #442d1c',
   boxShadow: 24,
@@ -34,6 +35,8 @@ export const styletextheaderfield = {
 export const styletextfield = {
   width: '70vw',
   maxWidth: '800px',
+  height: '300px',
+  minHeight: '100px',
   bgcolor: '#e8d1a7',
   border: '2px solid #442d1c',
   boxShadow: 24,
@@ -41,9 +44,12 @@ export const styletextfield = {
   mx: 'auto',
   '@media (min-width:600px)': {
     width: '50vw',
+   
   },
   '@media (min-width:900px)': {
     width: '50vw',
+   
+    height: '10vw'
   },
   '& .MuiInputBase-root': {
     overflowY: 'auto',
@@ -74,9 +80,8 @@ export const stylebuttonfieldfile = {
   boxShadow: 24,
   borderRadius: '12px',
   fontSize: '18px',
-  padding: '10px 20px',
-  width: '90%',
-  maxWidth: '300px',
+  width: ['70vw', '70vw', '400px'],
+
   height: '50px',
   fontFamily: 'MyFont',
 };

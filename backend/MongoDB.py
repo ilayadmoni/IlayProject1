@@ -8,7 +8,7 @@ class DB_Mongo:
     # Static variables for database name, collection name, and Uri
     DBName = "RecipeWebsite"
     CollectionName = "Recipe"
-    Uri = "mongodb://localhost:27017/"
+    Uri = "mongodb://localhost:27017/"  # Adjust this URI as needed for your MongoDB instance
     
 
     def __init__(self):

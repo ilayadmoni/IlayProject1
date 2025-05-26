@@ -5,7 +5,7 @@ from flask_socketio import SocketIO
 import io
 from MongoDB import DB_Mongo
 
-app = Flask(__name__, static_folder="./frontend/dist")
+app = Flask(__name__, static_folder="frontend/build", static_url_path="/")
 CORS(app, origins=['*'])  # Allow all origins
 socketio = SocketIO(app)
 Mongo = DB_Mongo()
@@ -32,20 +32,14 @@ def handle_cors(func):
     return decorator
 
 @app.errorhandler(404)
-@handle_cors
-@cross_origin(supports_credentials=True)
 def not_found(e):
     return app.send_static_file('index.html')
 
 @app.route('/')
-@handle_cors
-@cross_origin(supports_credentials=True)
 def index():
-    return app.send_static_file("index.html")
+    return app.send_static_file('index.html')
 
 @app.route('/<path:path>', methods=['GET'])
-@handle_cors
-@cross_origin(supports_credentials=True)
 def static_proxy(path):
     return app.send_static_file(path)
 
@@ -113,4 +107,4 @@ def handle_RecipePost():
 Mongo.create_RecipeDB_if_not_exists()
 if __name__ == '__main__':
    
-    app.run(host="0.0.0.0", port=3000, debug=True)
+    app.run(host="0.0.0.0", port=80, debug=True)

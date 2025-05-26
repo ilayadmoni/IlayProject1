@@ -12,7 +12,7 @@ import {
 } from './AddrecipeStyle';
 import axios from 'axios';
 
-function Addrecipe({setModalopen,setSnackbar , ipServer}) {
+function Addrecipe({setModalopen,setSnackbar , ipServer,fetchRecipes}) {
 
 const [recipeName, setRecipeName] = useState('');
 const [foodSupplies, setFoodSupplies] = useState('');
@@ -40,6 +40,7 @@ const [pictureOfRecipe, setPictureOfRecipe] = useState(null);
       });
       setModalopen(false);
       setSnackbar('המתכון נשלח בהצלחה', 'success');
+      fetchRecipes();
     } catch (error) {
       console.error('Upload failed:', error.response?.data || error.message);
       setModalopen(false);
@@ -91,13 +92,14 @@ const [pictureOfRecipe, setPictureOfRecipe] = useState(null);
               if (file) setPictureOfRecipe(file);
             }}
           />
-        </Button>
+        </Button></div>
+        <div className='rowbuttonstyleAddrecipe' >
         <Button
           sx={stylebuttonfieldfile}
           startIcon={<CheckCircleIcon />}
           onClick={handleSubmitpicture}
-        >שליחת מתכון</Button>
-      </div>
+        >שליחת מתכון</Button></div>
+      
       <div className='rowbuttonstyleAddrecipebottom' />
     </div>
     )};

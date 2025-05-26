@@ -7,7 +7,7 @@ body {
 }
 @font-face {
   font-family: 'MyFont';
-  src: url('D:\GitProject\IlayProject1\frontend\public\SecularOne-Regular.ttf') format('truetype');
+  src: url('./assets/fonts/SecularOne-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
