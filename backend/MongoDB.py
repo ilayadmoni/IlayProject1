@@ -2,15 +2,15 @@ import pymongo
 import gridfs
 from bson import ObjectId
 import os
-
+from pymongo import MongoClient
 
 class DB_Mongo:
     # Static variables for database name, collection name, and Uri
     DBName = "RecipeWebsite"
     CollectionName = "Recipe"
     # Use Atlas URI from environment variable if set, else default to Atlas URI
-    Uri = os.environ.get("MONGO_URI", "mongodb+srv://ilayadmoni9:Admoni1234!@cluster0.nblhe34.mongodb.net/RecipeWebsite?retryWrites=true&w=majority")
-    
+    Uri = "mongodb+srv://ilayadmoni9:Admoni1234!@cluster0.nblhe34.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    client = MongoClient(Uri, tls=True, tlsAllowInvalidCertificates=True)
 
     def __init__(self):
         self.client = pymongo.MongoClient(self.Uri)
