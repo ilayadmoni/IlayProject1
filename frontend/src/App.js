@@ -9,7 +9,7 @@ import Alert from '@mui/material/Alert';
 import axios from 'axios';
 
 
-const IPServer = process.env.REACT_APP_BACKEND_URL || 'http://localhost:80'; 
+const IPServer = process.env.REACT_APP_BACKEND_URL || 'https://ilayproject1.onrender.com'; 
 
 
 function App() {
