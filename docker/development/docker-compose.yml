@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  # MongoDB database service for storing recipes and images
   mongo:
     image: mongo:latest
     container_name: mongo_dev
@@ -9,6 +10,7 @@ services:
     volumes:
       - ../../data:/data/db
 
+  # Flask backend API service (runs Server.py)
   backend:
     image: python:3.12
     container_name: backend_dev
@@ -23,6 +25,7 @@ services:
     depends_on:
       - mongo
 
+  # React frontend development server (hot reload)
   frontend:
     image: node:22.6.0
     container_name: frontend_dev

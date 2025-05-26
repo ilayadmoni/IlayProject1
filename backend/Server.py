@@ -5,6 +5,8 @@ from flask_socketio import SocketIO
 import io
 from MongoDB import DB_Mongo
 
+# This Flask app is configured to serve both the React frontend (from the build folder)
+# and provide API endpoints for the client. All static files and SPA routes are handled here.
 app = Flask(__name__, static_folder="frontend/build", static_url_path="/")
 CORS(app, origins=['*'])  # Allow all origins
 socketio = SocketIO(app)
