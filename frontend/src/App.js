@@ -9,9 +9,11 @@ import Alert from '@mui/material/Alert';
 import axios from 'axios';
 
 
-let IPServer = 'http://10.100.102.3'; // Default IP address for local development
+const IPServer = process.env.REACT_APP_BACKEND_URL || 'http://localhost:80'; 
+
 
 function App() {
+  console.log('IPServer:', IPServer);
    const [openAddRecipe, setOpenAddRecipe] = useState(false);
    const [snackbar, setSnackbar] = useState({
       open: false,
@@ -46,7 +48,7 @@ function App() {
        <div className='bodystyleheader'>
          <Header handleOnClick={handleOnClickAdd} />
          <div className='headertextstyle'>
-             שלי ספר מתכונים
+              ספר מתכונים
          </div>
          <Homepage 
           recipes={recipes}

@@ -1,4 +1,3 @@
-
 import pymongo
 import gridfs
 from bson import ObjectId
@@ -8,7 +7,7 @@ class DB_Mongo:
     # Static variables for database name, collection name, and Uri
     DBName = "RecipeWebsite"
     CollectionName = "Recipe"
-    Uri = "mongodb://localhost:27017/"  # Adjust this URI as needed for your MongoDB instance
+    Uri = "mongodb://mongo:27017/"  # Adjusted to match docker-compose service name
     
 
     def __init__(self):
@@ -76,4 +75,4 @@ class DB_Mongo:
 Mongo = DB_Mongo()
 a= Mongo.get_all_recipe_from_db()        
 print(a)
-        
+

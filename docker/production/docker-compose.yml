@@ -1,9 +1,8 @@
-version: '3.8'
 services:
   backend:
     build:
-      context: .../
-      dockerfile: production/Dockerfile
+      context: ../../
+      dockerfile: docker/production/Dockerfile
     ports:
       - "80:80"
     depends_on:
@@ -13,6 +12,6 @@ services:
     image: mongo:latest
     hostname: mongo
     volumes:
-      - .../data:/data/db
+      - ../../data:/data/db
     ports:
       - "27017:27017"

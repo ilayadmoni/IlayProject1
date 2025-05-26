@@ -4,6 +4,7 @@ WORKDIR /app
 COPY frontend/package.json frontend/package-lock.json ./
 RUN npm install
 COPY frontend ./
+ENV REACT_APP_BACKEND_URL=http://10.100.102.2:80
 RUN npm run build
 
 # Stage 2: Backend
