@@ -1,0 +1,77 @@
+/* Make the recipe name large and centered */
+.recipepage-title {
+    font-size: 5rem;
+    font-weight: bold;
+    padding-bottom: 5%;
+    text-align: center;
+    margin: 24px 0 16px 0;
+    color: #e8d1a7;
+    font-family: 'Secular One', 'Rubik', Arial, sans-serif;
+}
+
+/* Center the headers */
+.recipepage-section h2 {
+    text-align: center;
+    color: #e8d1a7;
+    font-size: 3rem;
+    margin-bottom: 8px;
+    font-family: 'Secular One', 'Rubik', Arial, sans-serif;
+}
+
+/* Right-to-left for text blocks */
+.recipepage-supplies,
+.recipepage-order {
+    direction: rtl;
+    text-align: right;
+    color: #442D1c;
+    font-size: 1.8rem;
+    margin: 0 0 16px 0;
+    white-space: pre-wrap;
+    font-family: 'Myfont';
+}
+
+.recipepage-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 24px;
+    background-color: #84592b;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(132,89,43,0.08);
+}
+
+.recipepage-image-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.recipepage-image {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(132,89,43,0.12);
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 600px) {
+    .recipepage-title {
+        font-size: 2.2rem;
+        padding-bottom: 2%;
+    }
+    .recipepage-section h2 {
+        font-size: 1.5rem;
+    }
+    .recipepage-supplies,
+    .recipepage-order {
+        font-size: 1rem;
+    }
+    .recipepage-container {
+        padding: 1px;
+        
+      
+        box-sizing: border-box;
+    }
+    .recipepage-image {
+        max-height: 150px;
+    }
+}
