@@ -1,14 +1,16 @@
 import pymongo
 import gridfs
 from bson import ObjectId
-
+import os
+from pymongo import MongoClient
 
 class DB_Mongo:
     # Static variables for database name, collection name, and Uri
     DBName = "RecipeWebsite"
     CollectionName = "Recipe"
-    Uri = "mongodb://mongo:27017/"  # Adjusted to match docker-compose service name
-    
+    # Use Atlas URI from environment variable if set, else default to Atlas URI
+    Uri = "mongodb+srv://ilayadmoni9:Admoni1234!@cluster0.nblhe34.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    client = MongoClient(Uri, tls=True, tlsAllowInvalidCertificates=True)
 
     def __init__(self):
         self.client = pymongo.MongoClient(self.Uri)
@@ -73,6 +75,6 @@ class DB_Mongo:
         
         
 Mongo = DB_Mongo()
-a= Mongo.get_all_recipe_from_db()        
+a= Mongo.create_RecipeDB_if_not_exists()    
 print(a)
 
