@@ -23,9 +23,9 @@ body {
 }
 
 .headertextstyle {
-  padding: 30px;
+  padding-bottom: 30px;
   text-align: center;
-  font-size: 5rem; /* Desktop size */
+  font-size: 4rem; /* Desktop size */
   color: #442D1C;
   font-family: 'MyFont';
   display: flex;

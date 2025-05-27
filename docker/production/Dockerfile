@@ -17,5 +17,6 @@ RUN pip install -r requirements.txt
 COPY backend ./
 COPY --from=frontend-build /app/build ./frontend/build
 ENV PYTHONUNBUFFERED=1
+ENV URI_MONGO="mongodb+srv://ilayadmoni9:Admoni1234!@cluster0.nblhe34.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 EXPOSE 80
 CMD ["python", "Server.py"]

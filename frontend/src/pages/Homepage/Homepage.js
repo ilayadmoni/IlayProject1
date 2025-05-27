@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 import ModalBox from '../../components/modal/Modal.js';
 import Recipepage from '../Reciepepage/Recipepage.js';
 
-function Homepage({ recipes, ipServer }) {
+function Homepage({ recipes, ipServer,fetchRecipes }) {
   const [openRecipe, setOpenRecipe] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
 
@@ -13,6 +13,12 @@ function Homepage({ recipes, ipServer }) {
     setSelectedRecipe(recipe);
     setOpenRecipe(true);
   };
+
+  const handleDeleteRecipe = () => { 
+    setOpenRecipe(false);
+    fetchRecipes();
+
+  }
 
   return (
     <div className="homepagestyle">
@@ -33,7 +39,8 @@ function Homepage({ recipes, ipServer }) {
         setOpen={setOpenRecipe}
         BodyFunction={<Recipepage
                          recipe={selectedRecipe}
-                         ipServer={ipServer} />}
+                         ipServer={ipServer}
+                         handleDeleteRecipe={handleDeleteRecipe} />}
       />
     </div>
   );

@@ -53,16 +53,16 @@ function App() {
          <Homepage 
           recipes={recipes}
           ipServer={IPServer}
+          fetchRecipes={fetchRecipes}
           />
          <ModalBox
            open={openAddRecipe} 
            setOpen={setOpenAddRecipe}
            BodyFunction={<Addrecipe
-
-            setModalopen={setOpenAddRecipe}
-            setSnackbar={SetSnackbarOpen}
-            ipServer={IPServer}
-            fetchRecipes={fetchRecipes}
+                            setModalopen={setOpenAddRecipe}
+                            setSnackbar={SetSnackbarOpen}
+                            ipServer={IPServer}
+                            fetchRecipes={fetchRecipes}
               />}
            
          />
