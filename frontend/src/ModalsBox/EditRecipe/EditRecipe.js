@@ -12,7 +12,7 @@ import {
 } from './AddrecipeStyle';
 import axios from 'axios';
 
-function Addrecipe({setModalopen,setSnackbar , ipServer,fetchRecipes}) {
+function Addrecipe({recipe}) {
 
 const [recipeName, setRecipeName] = useState('');
 const [foodSupplies, setFoodSupplies] = useState('');
@@ -53,7 +53,7 @@ const [pictureOfRecipe, setPictureOfRecipe] = useState(null);
       <div className='headerstyleAddreciepe'>הוספת מתכון</div>
       <TextField
         sx={styletextheaderfield}
-        label="שם המתכון"
+        label={recipeName ? '' : "שם המתכון"}
         value={recipeName}
         onChange={(e) => setRecipeName(e.target.value)}
       />

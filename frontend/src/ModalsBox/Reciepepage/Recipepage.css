@@ -94,7 +94,7 @@
 
 @media (max-width: 600px) {
     .sectionbuttons {
-        flex-direction: column;
+        flex-direction: column-reverse;
         gap: 10px;
         width: 100%;
         align-items: center;

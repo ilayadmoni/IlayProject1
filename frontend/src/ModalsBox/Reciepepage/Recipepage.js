@@ -4,6 +4,7 @@ import { Button } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useState } from 'react';
+import axios from 'axios';
 
 
 const buttonmodestyle = {
@@ -40,9 +41,20 @@ function Recipepage({ recipe, ipServer, handleDeleteRecipe }) {
     return <div className="recipepage-container">No recipe selected.</div>;
   }
   const [deletemode, setDeletemode] = useState(false);
-  const handleDelete = () => {
-    console.log(`Deleting recipe: ${recipe._id}`);
-    handleDeleteRecipe();
+  const handleDelete = async () => {
+    const recipe_id_json = JSON.stringify({ recipe_id: recipe._id });
+    console.log(`Deleting recipe: ${recipe_id_json}`);
+    try {
+      await axios.post(`${ipServer}/deleterecipe`, recipe_id_json, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      handleDeleteRecipe();
+    } catch (error) {
+      console.error('Error deleting recipe:', error);
+      // Optionally, show an error snackbar here
+    }
   }
   return (
     <div className="recipepage-container">

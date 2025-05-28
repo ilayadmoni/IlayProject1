@@ -1,10 +1,10 @@
 import './Homepage.css';
 import CardComponent from '../../components/card/Card.js';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ModalBox from '../../components/modal/Modal.js';
-import Recipepage from '../Reciepepage/Recipepage.js';
+import Recipepage from '../../ModalsBox/Reciepepage/Recipepage.js';
 
-function Homepage({ recipes, ipServer,fetchRecipes }) {
+function Homepage({ recipes, ipServer,fetchRecipes,setSnackbar }) {
   const [openRecipe, setOpenRecipe] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
 
@@ -14,12 +14,14 @@ function Homepage({ recipes, ipServer,fetchRecipes }) {
     setOpenRecipe(true);
   };
 
-  const handleDeleteRecipe = () => { 
+  const handleDeleteRecipe = async () => { 
     setOpenRecipe(false);
-    fetchRecipes();
-
+    setSnackbar('המתכון נמחק בהצלחה', 'success');
+    console.log("before fetch delete");
+    await fetchRecipes();
+    console.log("after fetch delete");
   }
-
+ 
   return (
     <div className="homepagestyle">
       {recipes && recipes.length > 0 ? (

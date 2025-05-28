@@ -72,9 +72,28 @@ class DB_Mongo:
             item['_id'] = str(item['_id']) 
             item['ImageId'] = str(item['ImageId'])
         return RecipeList
-        
-        
-Mongo = DB_Mongo()
-a= Mongo.create_RecipeDB_if_not_exists()    
-print(a)
+    
+    def delete_recipe_from_db(self, recipe_id):
+        try:
+            recipe = self.RecipeCollection.find_one({"_id": ObjectId(recipe_id)})
+            if not recipe:
+                return {"error": "Recipe not found"}, 404
+            image_id = recipe['ImageId']
+            print(f"Recipe found: {recipe}")
+            recipe_name = recipe['RecipeName']
+            try:
+                self.fs.delete(ObjectId(image_id))
+            except Exception as e:
+                print(f"Error deleting image from GridFS: {e}")
+            result = self.RecipeCollection.delete_one({"_id": ObjectId(recipe_id)})
+            if result.deleted_count > 0:
+                return {"message": f"Recipe '{recipe_name}' and its image have been deleted successfully."}
+            else:
+                return {"error": "Recipe not found after image delete"}, 404
+        except Exception as e:
+            return {"error": str(e)}, 500
+          
+    
+    
+
 

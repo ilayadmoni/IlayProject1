@@ -41,7 +41,6 @@ export default function CardComponent({ recipe, IPServer,handleCardClick}) {
   const displayRecipe = recipe || loadingRecipe;
 
   useEffect(() => {
-    console.log('displayRecipe updated:', displayRecipe);
   }, [displayRecipe]);
 
  
