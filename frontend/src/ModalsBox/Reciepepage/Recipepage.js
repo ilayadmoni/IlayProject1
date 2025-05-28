@@ -5,14 +5,22 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useState } from 'react';
 import axios from 'axios';
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import {
+  styletextheaderfield,
+  styletextfield,
+  stylebuttonfieldfile,
+  VisuallyHiddenInput
+} from '../Addrecipe/AddrecipeStyle.js';
+import TextField from '@mui/material/TextField';
+import AttachFileIcon from '@mui/icons-material/AttachFile';
 
 
 const buttonmodestyle = {
   position: 'sticky',
   top: 0,
   right: 0,
-  height: ['60px', '70px', '50px'],        // smaller on mobile, bigger on desktop
-  minWidth: ['280px', '300px', '200px'],   // adjust width responsively
+  height: ['60px', '70px', '50px'],        // smaller on mobile, bigger on desktop   // adjust width responsively
   fontSize: ['1.3rem', '1.15rem', '1.2rem'],
   bgcolor: '#e8d1a7',
   color: '#442d1c',
@@ -25,6 +33,8 @@ const buttonmodestyle = {
   boxShadow: 24,
   padding: 0,
   zIndex: 1100,
+  border: '2px solid #442d1c',
+  width: ['70vw', '70vw', '250px'],
   '@media (max-width:480px)': {
 
   },
@@ -36,11 +46,22 @@ const buttonmodestyle = {
 // Expects a 'recipe' prop with fields: RecipeName, ImageId, FoodSupplies, OrderRecipe
 // Expects an 'ipServer' prop for the image server URL
 function Recipepage({ recipe, ipServer, handleDeleteRecipe }) {
+
+  const [recipeNameUpdate, setRecipeNameUpdate] = useState(recipe ? recipe.RecipeName : '');
+  const [foodSuppliesUpdate, setFoodSuppliesUpdate] = useState( recipe ? recipe.FoodSupplies : '');
+  const [orderRecipeUpdate, setOrderRecipeUpdate] = useState(recipe ? recipe.OrderRecipe : '');
+  const [pictureOfRecipeUpdate, setPictureOfRecipeUpdate] = useState(`${ipServer}/api/image/${recipe.ImageId}`);
   
   if (!recipe) {
     return <div className="recipepage-container">No recipe selected.</div>;
   }
+  console.log(recipe._id);
+  console.log(recipeNameUpdate);
+  console.log(foodSuppliesUpdate);
+  console.log(orderRecipeUpdate);
+  console.log(pictureOfRecipeUpdate);
   const [deletemode, setDeletemode] = useState(false);
+  const [editmode, setEditmode] = useState(false);
   const handleDelete = async () => {
     const recipe_id_json = JSON.stringify({ recipe_id: recipe._id });
     console.log(`Deleting recipe: ${recipe_id_json}`);
@@ -56,7 +77,8 @@ function Recipepage({ recipe, ipServer, handleDeleteRecipe }) {
       // Optionally, show an error snackbar here
     }
   }
-  return (
+return (
+  !editmode ? (
     <div className="recipepage-container">
       
       <h1 className="recipepage-title">{recipe.RecipeName}</h1>
@@ -94,7 +116,7 @@ function Recipepage({ recipe, ipServer, handleDeleteRecipe }) {
             <Button 
               sx={buttonmodestyle}
               startIcon={<EditIcon/>}
-              onClick={() => setDeletemode(true)}
+              onClick={() => setEditmode(true)}
                > עריכת המתכון </Button>
             <Button 
               sx={buttonmodestyle}
@@ -106,7 +128,93 @@ function Recipepage({ recipe, ipServer, handleDeleteRecipe }) {
       </div>
     
     </div>
-  );
-}
+  ) : (
+    <div className="recipepage-container1">
+     <div className='headerstyleAddreciepe1'>עריכת מתכון</div>
+     <TextField
+             sx={styletextheaderfield}
+             value={recipeNameUpdate}
+             onChange={(e) => setRecipeNameUpdate(e.target.value)}    
+           />
+      <div className='rowtextstyleAddrecipe1'>מרכיבים למתכון</div>
+      <TextField
+              sx={styletextfield}
+              multiline
+              minRows={6}
+              value={foodSuppliesUpdate}
+              onChange={(e) => setFoodSuppliesUpdate(e.target.value)}
+            />
+      <div className='rowtextstyleAddrecipe1'>אופן הכנה</div>
+      <TextField
+              sx={styletextfield}
+              multiline
+              minRows={6}
+              value={orderRecipeUpdate}
+              onChange={(e) => setOrderRecipeUpdate(e.target.value)}
+            />
+            {/* Show image preview if a file is selected or if the current value is a URL */}
+            {pictureOfRecipeUpdate && (typeof pictureOfRecipeUpdate === 'string' ? (
+              <img
+                src={pictureOfRecipeUpdate}
+                alt="Recipe Preview"
+                className="recipepage-image"
+                style={{ marginBottom: 13 }}
+              />
+            ) : (
+              <img
+                src={URL.createObjectURL(pictureOfRecipeUpdate)}
+                alt="Recipe Preview"
+                className="recipepage-image"
+                style={{ marginBottom: 16 }}
+              />
+            ))}
+            <Button
+          sx={stylebuttonfieldfile}
+          startIcon={<AttachFileIcon />}
+          component="label"
+          role={undefined}
+          variant="contained"
+          tabIndex={-1}
+        >
+          {pictureOfRecipeUpdate && pictureOfRecipeUpdate.name ? pictureOfRecipeUpdate.name : "שנה קובץ"}
+          <VisuallyHiddenInput
+            type="file"
+            accept="image/*"
+            onChange={event => {
+              const file = event.target.files[0];
+              if (file) {
+                setPictureOfRecipeUpdate(file);
+              } else {
+                setPictureOfRecipeUpdate(pictureOfRecipeUpdate);
+              }
+            }}
+          />
+        </Button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+       <div className="sectionbuttons">
+      <Button 
+        sx={buttonmodestyle}
+        onClick={() => setEditmode(false)} 
+        startIcon={<TaskAltIcon/>}
+        >עדכן מתכון </Button>
+        <Button 
+        sx={buttonmodestyle}
+        onClick={() => setEditmode(false)} 
+        >חזרה </Button></div>
+    </div>
+  )
+); }
 
 export default Recipepage;

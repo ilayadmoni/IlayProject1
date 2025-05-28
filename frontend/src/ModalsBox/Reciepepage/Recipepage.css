@@ -34,7 +34,8 @@
     max-width: 600px;
     margin-top: -45px; /* Only for desktop */
     padding: 24px;
-    position: relative; /* Needed for absolutely positioned children like the edit button */
+    position: relative;
+     /* Needed for absolutely positioned children like the edit button */
 }
 
 @media (max-width: 1024px) {
@@ -102,3 +103,51 @@
         
     }
 }
+
+.headerstyleAddreciepe1 {
+    font-size: 40px;
+    color: #e8d1a7;
+    font-family: 'MyFont';
+    text-align: center;
+
+}
+
+
+@media (max-width: 768px) {
+  .headerstyleAddreciepe1 {
+    font-size: 42px;
+  }
+  .rowtextstyleAddrecipe1 {
+    font-size: 24px;
+    text-align: center;
+  }
+
+
+}
+
+
+
+ .recipepage-container1 { 
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: -50px; /* Only for desktop */
+  padding: 2%;
+  box-sizing: border-box;
+  overflow-x: hidden; } 
+
+  .rowtextstyleAddrecipe1 {
+    display: flex;
+    color: #e8d1a7;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    width: 100%;
+    padding-top: 2%;
+}
+

@@ -51,7 +51,9 @@ export const styletextfield = {
   '& .MuiInputBase-root': {
     overflowY: 'auto',
     maxHeight: '200px',
-    // Keep scroll styling
+  },
+  '& .MuiInputBase-input': {
+    paddingTop: '30px', // Add padding to the actual input area for multiline
   },
   '& .MuiInputLabel-root': {
     color: '#442d1c',
@@ -76,7 +78,7 @@ export const stylebuttonfieldfile = {
   border: '2px solid #442d1c',
   boxShadow: 24,
   borderRadius: '12px',
-  fontSize: '18px',
+  fontSize: ['1.3rem', '1.15rem', '1.2rem'],
   width: ['70vw', '70vw', '250px'],
   height: '50px',
   fontFamily: 'MyFont',
