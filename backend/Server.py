@@ -161,11 +161,6 @@ def handle_Recipeedit():
          )
         return response    
     
-    
-    
-    
-    
-    
 Mongo.create_RecipeDB_if_not_exists()
 if __name__ == '__main__':
    
