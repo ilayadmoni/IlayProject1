@@ -3,11 +3,14 @@ from flask_cors import CORS, cross_origin
 from flask import Flask, request, Response, jsonify,send_file
 from flask_socketio import SocketIO
 import io
+import os
 from MongoDB import DB_Mongo
 
 # This Flask app is configured to serve both the React frontend (from the build folder)
 # and provide API endpoints for the client. All static files and SPA routes are handled here.
-app = Flask(__name__, static_folder="frontend/build", static_url_path="/")
+StaticFolder = os.environ.get("STATIC_FOLDER", "../frontend/build")
+print(StaticFolder)
+app = Flask(__name__, static_folder=StaticFolder, static_url_path="/")
 CORS(app, origins=['*'])  # Allow all origins
 socketio = SocketIO(app)
 Mongo = DB_Mongo()
@@ -129,6 +132,40 @@ def handle_DeleteRecipe():
             }
          )
     return response
+    
+#Collection data from Client and edit recipe on MongoDB
+@app.route('/editrecipe', methods=['POST', 'OPTIONS'])
+@handle_cors
+@cross_origin(supports_credentials=True)
+def handle_Recipeedit():
+    if request.method == 'POST':
+        #Collection data from Client
+        RecipeDetails = [request.form.get('_id'),
+                         request.form.get('RecipeName'),
+                         request.form.get('FoodSupplies'),
+                         request.form.get('OrderRecipe'),
+                         ]
+        
+        ImageFile = request.files.get('image') 
+        Mongo.edit_recipe_to_db(RecipeDetails , ImageFile)
+        return jsonify({'message': 'Image received successfully'})
+    elif request.method == 'OPTIONS':
+       # Respond to the preflight request
+       response = app.response_class(
+            response='',
+            status=200,
+            headers={
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'POST, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type,Authorization',
+            }
+         )
+    return response    
+    
+    
+    
+    
+    
     
 Mongo.create_RecipeDB_if_not_exists()
 if __name__ == '__main__':

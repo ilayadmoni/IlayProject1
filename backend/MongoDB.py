@@ -92,8 +92,50 @@ class DB_Mongo:
                 return {"error": "Recipe not found after image delete"}, 404
         except Exception as e:
             return {"error": str(e)}, 500
-          
-    
-    
+        
+        
+        #Function for collection the data from client and store in the MongoDB
+    def edit_recipe_to_db(self, RecipeDetails, ImageFile):
+        recipe_id = RecipeDetails[0]
+        # Find the existing recipe
+        recipe = self.RecipeCollection.find_one({'_id': ObjectId(recipe_id)})
+        if not recipe:
+            return {'error': 'Recipe not found'}, 404
+
+        update_fields = {
+            'RecipeName': RecipeDetails[1],
+            'FoodSupplies': RecipeDetails[2],
+            'OrderRecipe': RecipeDetails[3],
+        }
+
+        # Handle image update
+        if ImageFile is not None and getattr(ImageFile, 'filename', '') != '':
+            # Delete old image from GridFS
+            old_image_id = recipe.get('ImageId')
+            if old_image_id:
+                try:
+                    self.fs.delete(ObjectId(old_image_id))
+                except Exception as e:
+                    print(f"Error deleting old image from GridFS: {e}")
+            # Upload new image
+            FileId = self.fs.put(
+                ImageFile,
+                filename=ImageFile.filename,
+                content_type=ImageFile.content_type
+            )
+            update_fields['ImageId'] = FileId
+        # else: keep existing ImageId
+
+        result = self.RecipeCollection.update_one(
+            {'_id': ObjectId(recipe_id)},
+            {'$set': update_fields}
+        )
+        if result.modified_count > 0:
+            return {'message': 'Recipe updated successfully.'}
+        else:
+            return {'message': 'No changes made to the recipe.'}
+
+
+
 
 

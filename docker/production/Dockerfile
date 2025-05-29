@@ -5,7 +5,7 @@ WORKDIR /app
 COPY frontend/package.json frontend/package-lock.json ./
 RUN npm install
 COPY frontend ./
-ENV REACT_APP_BACKEND_URL=https://ilayproject1.onrender.com
+ENV REACT_APP_BACKEND_URL=http://localhost:80
 RUN npm run build
 
 # Stage 2: Backend
@@ -18,5 +18,6 @@ COPY backend ./
 COPY --from=frontend-build /app/build ./frontend/build
 ENV PYTHONUNBUFFERED=1
 ENV URI_MONGO="mongodb+srv://ilayadmoni9:Admoni1234!@cluster0.nblhe34.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+ENV STATIC_FOLDER="../frontend/build"
 EXPOSE 80
 CMD ["python", "Server.py"]
