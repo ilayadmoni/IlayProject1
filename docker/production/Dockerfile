@@ -5,7 +5,7 @@ WORKDIR /app
 COPY frontend/package.json frontend/package-lock.json ./
 RUN npm install
 COPY frontend ./
-ENV REACT_APP_BACKEND_URL=http://localhost:80
+ENV REACT_APP_BACKEND_URL=https://ilayproject1.onrender.com
 RUN npm run build
 
 # Stage 2: Backend
