@@ -9,7 +9,6 @@ from MongoDB import DB_Mongo
 # This Flask app is configured to serve both the React frontend (from the build folder)
 # and provide API endpoints for the client. All static files and SPA routes are handled here.
 StaticFolder = os.environ.get("STATIC_FOLDER", "../frontend/build")
-print(StaticFolder)
 app = Flask(__name__, static_folder=StaticFolder, static_url_path="/")
 CORS(app, origins=['*'])  # Allow all origins
 socketio = SocketIO(app)
@@ -98,7 +97,7 @@ def handle_RecipePost():
         return jsonify({'message': 'Image received successfully', 'filename': ImageFile.filename})
     elif request.method == 'OPTIONS':
        # Respond to the preflight request
-       response = app.response_class(
+        response = app.response_class(
             response='',
             status=200,
             headers={
@@ -107,7 +106,7 @@ def handle_RecipePost():
                 'Access-Control-Allow-Headers': 'Content-Type,Authorization',
             }
          )
-    return response  
+        return response  
 
 #Delete recipe from Client and post on MongoDB
 @app.route('/deleterecipe', methods=['POST', 'OPTIONS'])
@@ -151,7 +150,7 @@ def handle_Recipeedit():
         return jsonify({'message': 'Image received successfully'})
     elif request.method == 'OPTIONS':
        # Respond to the preflight request
-       response = app.response_class(
+        response = app.response_class(
             response='',
             status=200,
             headers={
@@ -160,7 +159,7 @@ def handle_Recipeedit():
                 'Access-Control-Allow-Headers': 'Content-Type,Authorization',
             }
          )
-    return response    
+        return response    
     
     
     
