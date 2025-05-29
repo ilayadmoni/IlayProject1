@@ -8,9 +8,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import axios from 'axios';
 
-
-const IPServer = process.env.REACT_APP_BACKEND_URL || 'http://10.100.102.3:80'; 
-
+const IPServer = process.env.REACT_APP_BACKEND_URL || 'http://localhost:80'; 
 
 function App() {
 
