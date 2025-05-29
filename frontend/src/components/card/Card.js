@@ -26,7 +26,16 @@ const styleCard = {
   margin: 'auto',
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'space-between'
+  justifyContent: 'space-between',
+  transition: 'transform 0.2s, opacity 0.2s',
+  '@media (hover: hover)': {
+    '&:hover': {
+      opacity: 0.9, // slightly faded
+      transform: 'scale(1.08)', // increase size on hover
+      transition: 'transform 0.2s, opacity 0.2s',
+      bgcolor: '#743014', // darken background on hover
+    },
+  },
 };
 
 const loadingRecipe = {

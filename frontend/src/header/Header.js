@@ -1,7 +1,7 @@
 import './Header.css'
 import Button from '@mui/material/Button';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
-import { borderColor, boxSizing, fontFamily, fontSize, gap, minWidth } from '@mui/system';
+import { bgcolor, borderColor, boxSizing, fontFamily, fontSize, gap, minWidth } from '@mui/system';
 
 
 const buttonstyle = {
@@ -14,6 +14,15 @@ const buttonstyle = {
   border: '1px solid #BFA6A0',
   borderRadius: '12px',
   fontFamily: 'Myfont',
+  '@media (hover: hover)': {
+    '&:hover': {
+      opacity: 0.9, // slightly faded
+      transform: 'scale(1.08)', // increase size on hover
+      transition: 'transform 0.2s, opacity 0.2s',
+      bgcolor: '#84592b', // darken background on hover
+    },
+  },
+  transition: 'transform 0.2s, opacity 0.2s', // smooth transition for hover
 };
 
 
@@ -35,4 +44,3 @@ function Header({handleOnClick}) {
     )
   }
   export default Header;
-  

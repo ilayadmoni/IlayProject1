@@ -35,9 +35,16 @@ const buttonmodestyle = {
   zIndex: 1100,
   border: '2px solid #442d1c',
   width: ['70vw', '70vw', '250px'],
-  '@media (max-width:480px)': {
-
+  '@media (hover: hover)': {
+    '&:hover': {
+      opacity: 0.9, // slightly faded
+      transform: 'scale(1.08)', // increase size on hover
+      transition: 'transform 0.2s, opacity 0.2s',
+      bgcolor: '#9f9167', // darken background on hover
+    },
   },
+  transition: 'transform 0.2s, opacity 0.2s', // smooth transition for hover
+
 };
 
 
@@ -45,7 +52,7 @@ const buttonmodestyle = {
 // Template for a recipe details page
 // Expects a 'recipe' prop with fields: RecipeName, ImageId, FoodSupplies, OrderRecipe
 // Expects an 'ipServer' prop for the image server URL
-function Recipepage({ recipe, ipServer, handleDeleteRecipe }) {
+function Recipepage({ recipe, ipServer, handleDeleteRecipe , handleEditRecipe }) {
 
   const [recipeNameUpdate, setRecipeNameUpdate] = useState(recipe ? recipe.RecipeName : '');
   const [foodSuppliesUpdate, setFoodSuppliesUpdate] = useState( recipe ? recipe.FoodSupplies : '');
@@ -55,11 +62,7 @@ function Recipepage({ recipe, ipServer, handleDeleteRecipe }) {
   if (!recipe) {
     return <div className="recipepage-container">No recipe selected.</div>;
   }
-  console.log(recipe._id);
-  console.log(recipeNameUpdate);
-  console.log(foodSuppliesUpdate);
-  console.log(orderRecipeUpdate);
-  console.log(pictureOfRecipeUpdate);
+
   const [deletemode, setDeletemode] = useState(false);
   const [editmode, setEditmode] = useState(false);
   const handleDelete = async () => {
@@ -75,6 +78,30 @@ function Recipepage({ recipe, ipServer, handleDeleteRecipe }) {
     } catch (error) {
       console.error('Error deleting recipe:', error);
       // Optionally, show an error snackbar here
+    }
+  }
+
+  const handleEdit = async () => {
+    const formData = new FormData();
+    formData.append('_id', recipe._id);
+    if(typeof(pictureOfRecipeUpdate) !== 'string') 
+    {
+    formData.append('image', pictureOfRecipeUpdate);
+    }
+    formData.append("RecipeName", recipeNameUpdate);
+    formData.append("FoodSupplies", foodSuppliesUpdate);
+    formData.append("OrderRecipe", orderRecipeUpdate);
+    console.log(pictureOfRecipeUpdate);
+
+    try {
+      const response = await axios.post(`${ipServer}/editrecipe`,formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      handleEditRecipe();
+    } catch (error) {
+      console.error('Upload failed:', error.response?.data || error.message);
     }
   }
 return (
@@ -190,23 +217,10 @@ return (
             }}
           />
         </Button>
-
-
-
-
-
-
-
-
-
-
-
-
-
        <div className="sectionbuttons">
       <Button 
         sx={buttonmodestyle}
-        onClick={() => setEditmode(false)} 
+        onClick={handleEdit} 
         startIcon={<TaskAltIcon/>}
         >עדכן מתכון </Button>
         <Button 

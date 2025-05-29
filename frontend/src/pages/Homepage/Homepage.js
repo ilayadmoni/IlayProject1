@@ -17,9 +17,13 @@ function Homepage({ recipes, ipServer,fetchRecipes,setSnackbar }) {
   const handleDeleteRecipe = async () => { 
     setOpenRecipe(false);
     setSnackbar('המתכון נמחק בהצלחה', 'success');
-    console.log("before fetch delete");
     await fetchRecipes();
-    console.log("after fetch delete");
+  }
+
+  const handleEditRecipe = async () => {
+    setOpenRecipe(false);
+    setSnackbar('המתכון עודכן בהצלחה', 'success');
+    await fetchRecipes();
   }
  
   return (
@@ -42,7 +46,9 @@ function Homepage({ recipes, ipServer,fetchRecipes,setSnackbar }) {
         BodyFunction={<Recipepage
                          recipe={selectedRecipe}
                          ipServer={ipServer}
-                         handleDeleteRecipe={handleDeleteRecipe} />}
+                         handleDeleteRecipe={handleDeleteRecipe} 
+                         handleEditRecipe={handleEditRecipe}
+                        />}
       />
     </div>
   );

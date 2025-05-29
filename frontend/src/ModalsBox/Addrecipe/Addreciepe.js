@@ -45,7 +45,6 @@ const [pictureOfRecipe, setPictureOfRecipe] = useState(null);
       console.error('Upload failed:', error.response?.data || error.message);
       setModalopen(false);
       setSnackbar('תקלה! קיימת בעיית חיבור לשרת', 'error');
-      
     }
   };
     return (

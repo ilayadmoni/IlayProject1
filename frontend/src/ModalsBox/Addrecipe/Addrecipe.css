@@ -19,7 +19,7 @@
 }
 
 .headerstyleAddreciepe {
-    font-size: 60px;
+    font-size: 40px;
     color: #e8d1a7;
     padding: 1%;
 
@@ -30,7 +30,7 @@
     flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
-    font-size: 35px;
+    font-size: 25px;
     width: 100%;
     padding-top: 2%;
 }
@@ -48,9 +48,9 @@
 
 
 .rowbuttonstyleAddreciepe {
-    display: flex;               /* Enable flexbox */
-    justify-content: center;     /* Horizontal centering */
-    align-items: center;         /* Vertical centering */
+    display: flex;               
+    justify-content: center;    
+    align-items: center;        
     padding: 1%;
     width: 95%;
     margin: auto;
