@@ -9,14 +9,14 @@ const styleCard = {
   width: {
     xs: '30vw',
     sm: '70vw',
-    md: '500px',
+    md: '200px',
   },
   height: {
-    xs: '60vw',
+    xs: '50vw',
     sm: '80vw',
-    md: '500px',
+    md: '260px',
   },
-  maxWidth: '500px',
+  maxWidth: '200px',
   maxHeight: '500px',
   bgcolor: '#84592b',
   border: '3px solid #442d1c',
@@ -26,7 +26,16 @@ const styleCard = {
   margin: 'auto',
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'space-between'
+  justifyContent: 'space-between',
+  transition: 'transform 0.2s, opacity 0.2s',
+  '@media (hover: hover)': {
+    '&:hover': {
+      opacity: 0.9, // slightly faded
+      transform: 'scale(1.08)', // increase size on hover
+      transition: 'transform 0.2s, opacity 0.2s',
+      bgcolor: '#743014', // darken background on hover
+    },
+  },
 };
 
 const loadingRecipe = {
@@ -41,7 +50,6 @@ export default function CardComponent({ recipe, IPServer,handleCardClick}) {
   const displayRecipe = recipe || loadingRecipe;
 
   useEffect(() => {
-    console.log('displayRecipe updated:', displayRecipe);
   }, [displayRecipe]);
 
  
@@ -61,8 +69,8 @@ export default function CardComponent({ recipe, IPServer,handleCardClick}) {
           component="img"
           image={`${IPServer}/api/image/${displayRecipe.ImageId}`}
           sx={{
-            width: '100%',
-            maxWidth: '380px', // Limit the image width
+            width: '85%',
+            maxWidth: '1900px', // Limit the image width
             height: 'auto',
             aspectRatio: '1 / 1', // Force square aspect ratio
             objectFit: 'cover',   // Crop to fill the square

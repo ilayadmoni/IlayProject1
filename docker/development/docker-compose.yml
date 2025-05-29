@@ -1,15 +1,6 @@
 version: '3.8'
 
 services:
-  # MongoDB database service for storing recipes and images
-  mongo:
-    image: mongo:latest
-    container_name: mongo_dev
-    ports:
-      - "27017:27017"
-    volumes:
-      - ../../data:/data/db
-
   # Flask backend API service (runs Server.py)
   backend:
     image: python:3.12
@@ -18,14 +9,10 @@ services:
     command: sh -c "pip install -r backend/requirements.txt && python backend/Server.py"
     volumes:
       - ../../backend:/app/backend
-    environment:
-      - FLASK_ENV=development
     ports:
       - "80:80"
-    depends_on:
-      - mongo
 
-  # React frontend development server (hot reload)
+  # React frontend development server 
   frontend:
     image: node:22.6.0
     container_name: frontend_dev
@@ -37,5 +24,4 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - CHOKIDAR_USEPOLLING=true
       - REACT_APP_BACKEND_URL=http://localhost:80

@@ -1,10 +1,10 @@
 import './Homepage.css';
 import CardComponent from '../../components/card/Card.js';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ModalBox from '../../components/modal/Modal.js';
-import Recipepage from '../Reciepepage/Recipepage.js';
+import Recipepage from '../../ModalsBox/Reciepepage/Recipepage.js';
 
-function Homepage({ recipes, ipServer }) {
+function Homepage({ recipes, ipServer,fetchRecipes,setSnackbar }) {
   const [openRecipe, setOpenRecipe] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
 
@@ -14,6 +14,18 @@ function Homepage({ recipes, ipServer }) {
     setOpenRecipe(true);
   };
 
+  const handleDeleteRecipe = async () => { 
+    setOpenRecipe(false);
+    setSnackbar('המתכון נמחק בהצלחה', 'success');
+    await fetchRecipes();
+  }
+
+  const handleEditRecipe = async () => {
+    setOpenRecipe(false);
+    setSnackbar('המתכון עודכן בהצלחה', 'success');
+    await fetchRecipes();
+  }
+ 
   return (
     <div className="homepagestyle">
       {recipes && recipes.length > 0 ? (
@@ -33,7 +45,10 @@ function Homepage({ recipes, ipServer }) {
         setOpen={setOpenRecipe}
         BodyFunction={<Recipepage
                          recipe={selectedRecipe}
-                         ipServer={ipServer} />}
+                         ipServer={ipServer}
+                         handleDeleteRecipe={handleDeleteRecipe} 
+                         handleEditRecipe={handleEditRecipe}
+                        />}
       />
     </div>
   );

@@ -105,6 +105,30 @@ def handle_RecipePost():
             }
          )
     return response  
+
+#Delete recipe from Client and post on MongoDB
+@app.route('/deleterecipe', methods=['POST', 'OPTIONS'])
+@handle_cors
+@cross_origin(supports_credentials=True)
+def handle_DeleteRecipe():
+    if request.method == 'POST':
+        recipe_id = request.json['recipe_id']
+        print(f"Delete the recipe_id: {recipe_id}")
+        Mongo.delete_recipe_from_db(recipe_id)
+        # Return success JSON
+        return jsonify({'message': 'Image received successfully'})
+    elif request.method == 'OPTIONS':
+       # Respond to the preflight request
+       response = app.response_class(
+            response='',
+            status=200,
+            headers={
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'POST, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type',
+            }
+         )
+    return response
     
 Mongo.create_RecipeDB_if_not_exists()
 if __name__ == '__main__':

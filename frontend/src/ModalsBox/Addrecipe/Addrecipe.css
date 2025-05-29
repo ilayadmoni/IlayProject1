@@ -1,0 +1,63 @@
+.bodystyle {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: -50px; /* Only for desktop */
+  padding: 2%;
+  box-sizing: border-box;
+  overflow-x: hidden; 
+}
+
+@media (max-width: 1024px) {
+  .bodystyle {
+    margin-top: 0; /* Remove negative margin on tablets and smaller */
+  }
+}
+
+.headerstyleAddreciepe {
+    font-size: 40px;
+    color: #e8d1a7;
+    padding: 1%;
+
+}
+.rowtextstyleAddrecipe {
+    display: flex;
+    color: #e8d1a7;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    width: 100%;
+    padding-top: 2%;
+}
+
+@media (max-width: 768px) {
+  .headerstyleAddreciepe {
+    font-size: 32px;
+  }
+
+  .rowtextstyleAddrecipe {
+    font-size: 24px;
+    text-align: center;
+  }
+}
+
+
+.rowbuttonstyleAddreciepe {
+    display: flex;               
+    justify-content: center;    
+    align-items: center;        
+    padding: 1%;
+    width: 95%;
+    margin: auto;
+    
+}
+@media (max-width: 600px) {
+  .rowbuttonstyleAddreciepebottom {
+    padding: 50px;
+  }
+}

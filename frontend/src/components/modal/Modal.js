@@ -69,6 +69,15 @@ const buttonclosestyle = {
     minWidth: '36px',
     height: '36px',
   },
+  '@media (hover: hover)': {
+    '&:hover': {
+      opacity: 0.9, // slightly faded
+      transform: 'scale(1.08)', // increase size on hover
+      transition: 'transform 0.2s, opacity 0.2s',
+      bgcolor: '#9f9167', // darken background on hover
+    },
+  },
+  transition: 'transform 0.2s, opacity 0.2s',
 };
 
 export default function ModalBox({open,setOpen,BodyFunction}) {
@@ -76,7 +85,6 @@ export default function ModalBox({open,setOpen,BodyFunction}) {
 
   return (
     <div>
-      
       <Modal
         open={open}
         onClose={handleClose}

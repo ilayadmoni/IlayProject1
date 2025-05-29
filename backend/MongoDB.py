@@ -8,8 +8,8 @@ class DB_Mongo:
     # Static variables for database name, collection name, and Uri
     DBName = "RecipeWebsite"
     CollectionName = "Recipe"
-    # Use Atlas URI from environment variable if set, else default to Atlas URI
-    Uri = "mongodb+srv://ilayadmoni9:Admoni1234!@cluster0.nblhe34.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    # Use URI_MONGO from environment variable if set, else default to localhost
+    Uri = os.environ.get("URI_MONGO", "mongodb://localhost:27017/")
     client = MongoClient(Uri, tls=True, tlsAllowInvalidCertificates=True)
 
     def __init__(self):
@@ -72,9 +72,28 @@ class DB_Mongo:
             item['_id'] = str(item['_id']) 
             item['ImageId'] = str(item['ImageId'])
         return RecipeList
-        
-        
-Mongo = DB_Mongo()
-a= Mongo.create_RecipeDB_if_not_exists()    
-print(a)
+    
+    def delete_recipe_from_db(self, recipe_id):
+        try:
+            recipe = self.RecipeCollection.find_one({"_id": ObjectId(recipe_id)})
+            if not recipe:
+                return {"error": "Recipe not found"}, 404
+            image_id = recipe['ImageId']
+            print(f"Recipe found: {recipe}")
+            recipe_name = recipe['RecipeName']
+            try:
+                self.fs.delete(ObjectId(image_id))
+            except Exception as e:
+                print(f"Error deleting image from GridFS: {e}")
+            result = self.RecipeCollection.delete_one({"_id": ObjectId(recipe_id)})
+            if result.deleted_count > 0:
+                return {"message": f"Recipe '{recipe_name}' and its image have been deleted successfully."}
+            else:
+                return {"error": "Recipe not found after image delete"}, 404
+        except Exception as e:
+            return {"error": str(e)}, 500
+          
+    
+    
+
 
