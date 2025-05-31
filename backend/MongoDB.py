@@ -5,15 +5,14 @@ import os
 from pymongo import MongoClient
 
 class DB_Mongo:
-    # Static variables for database name, collection name, and Uri
+    # Static variables for database name and collection name only
     DBName = "RecipeWebsite"
     CollectionName = "Recipe"
-    # Use URI_MONGO from environment variable if set, else default to localhost
-    Uri = os.environ.get("URI_MONGO", "mongodb://localhost:27017/")
-    client = MongoClient(Uri, tls=True, tlsAllowInvalidCertificates=True)
 
     def __init__(self):
-        self.client = pymongo.MongoClient(self.Uri)
+        # Read URI_MONGO from environment at instance creation time
+        self.Uri = os.environ.get("URI_MONGO", "mongodb://localhost:27017/")
+        self.client = MongoClient(self.Uri)
         self.db = self.client[self.DBName]
         self.fs = gridfs.GridFS(self.db ,collection="image_collection")
         self.RecipeCollection = self.db[self.CollectionName]
@@ -134,8 +133,6 @@ class DB_Mongo:
             return {'message': 'Recipe updated successfully.'}
         else:
             return {'message': 'No changes made to the recipe.'}
-
-
 
 
 
