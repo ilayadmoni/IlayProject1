@@ -17,7 +17,7 @@ RUN pip install -r requirements.txt
 COPY backend ./
 COPY --from=frontend-build /app/build ./frontend/build
 ENV PYTHONUNBUFFERED=1
-ENV URI_MONGO="mongodb://localhost:27017/"
-ENV STATIC_FOLDER="../frontend/build"
+ENV URI_MONGO=ENV URI_MONGO="mongodb://host.docker.internal:27017/"
+ENV STATIC_FOLDER="frontend/build"
 EXPOSE 80
 CMD ["python", "Server.py"]
