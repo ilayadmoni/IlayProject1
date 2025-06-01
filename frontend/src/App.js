@@ -7,8 +7,10 @@ import Addrecipe from './ModalsBox/Addrecipe/Addreciepe';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import axios from 'axios';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Aboutpage from './pages/AboutMe/Aboutpage';
 
-const IPServer = process.env.REACT_APP_BACKEND_URL || 'http://localhost:80'; 
+const IPServer = process.env.REACT_APP_BACKEND_URL || 'http://10.100.102.4:80'; 
 
 function App() {
 
@@ -43,49 +45,53 @@ function App() {
      }, []);
  
      return (
-       <div className='bodystyleheader'>
-         <Header handleOnClick={handleOnClickAdd} />
-         <div className='headertextstyle'>
-              אתר מתכונים
-         </div>
-         <Homepage 
-          recipes={recipes}
-          ipServer={IPServer}
-          fetchRecipes={fetchRecipes}
-          setSnackbar={SetSnackbarOpen}
+      <Router>
+        <div className='bodystyleheader'>
+          <Header handleOnClick={handleOnClickAdd} />
+          
+          <ModalBox
+            open={openAddRecipe}
+            setOpen={setOpenAddRecipe}
+            BodyFunction={<Addrecipe
+              setModalopen={setOpenAddRecipe}
+              setSnackbar={SetSnackbarOpen}
+              ipServer={IPServer}
+              fetchRecipes={fetchRecipes}
+            />}
           />
-         <ModalBox
-           open={openAddRecipe} 
-           setOpen={setOpenAddRecipe}
-           BodyFunction={<Addrecipe
-                            setModalopen={setOpenAddRecipe}
-                            setSnackbar={SetSnackbarOpen}
-                            ipServer={IPServer}
-                            fetchRecipes={fetchRecipes}
-              />}
-           
-         />
- 
-        <Snackbar
-   open={snackbar.open}
-   autoHideDuration={6000}
-   onClose={handleCloseSnackbar}
- >
-   <Alert
-     onClose={handleCloseSnackbar}
-     severity={snackbar.severity}
-     variant="filled"
-     sx={{
-       width: '100%',
-       fontFamily: 'Myfont' 
-     }}
-   >
-     {snackbar.message}
-   </Alert>
- </Snackbar>
- 
-       
-       </div>
+          <Routes>
+            <Route path="/aboutme" element={<Aboutpage/>} />
+            <Route path="/" element={
+              <>
+                <div className='headertextstyle'>המתכונים שלי</div>
+                <Homepage 
+                  recipes={recipes}
+                  ipServer={IPServer}
+                  fetchRecipes={fetchRecipes}
+                  setSnackbar={SetSnackbarOpen}
+                />
+              </>
+            } />
+          </Routes>
+          <Snackbar
+            open={snackbar.open}
+            autoHideDuration={6000}
+            onClose={handleCloseSnackbar}
+          >
+            <Alert
+              onClose={handleCloseSnackbar}
+              severity={snackbar.severity}
+              variant="filled"
+              sx={{
+                width: '100%',
+                fontFamily: 'Myfont' 
+              }}
+            >
+              {snackbar.message}
+            </Alert>
+          </Snackbar>
+        </div>
+      </Router>
      );
    }
    

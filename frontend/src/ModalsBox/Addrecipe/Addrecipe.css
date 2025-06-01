@@ -20,13 +20,13 @@
 
 .headerstyleAddreciepe {
     font-size: 40px;
-    color: #e8d1a7;
+    color: #f0efee;
     padding: 1%;
 
 }
 .rowtextstyleAddrecipe {
     display: flex;
-    color: #e8d1a7;
+    color: #f0efee;
     flex-direction: row-reverse;
     justify-content: center;
     align-items: center;

@@ -1,0 +1,70 @@
+/* עיצוב עמוד אודות */
+.about-container {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #e2dad2;
+  margin-top: 10px;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px 0 #f0efee;
+  padding: 32px 24px;
+  font-family: 'Myfont', Arial, sans-serif;
+  color: #726352;
+}
+
+.about-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 18px;
+  color: #4f5141;
+  text-align: center;
+}
+
+.about-description {
+  font-size: 1.15rem;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.about-details {
+  margin-top: 18px;
+}
+
+.about-details h2 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: #4f5141;
+}
+
+.about-details ul {
+  padding-right: 24px;
+  margin-bottom: 18px;
+}
+
+.about-details li {
+  margin-bottom: 6px;
+  font-size: 1rem;
+}
+
+.about-details a {
+  color: #4f5141;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.about-details a:hover {
+  color: #f0efee;
+}
+
+.about-container .MuiAvatar-root {
+  margin: 0 auto;
+  box-shadow: 0 2px 12px 0 #f0efee;
+  border: 3px solid #bfa6a0;
+  background: #fffbe9;
+}
+
+@media (max-width: 600px) {
+  .about-container {
+    margin: 15px 15px;
+    padding: 5px 10px;
+  }
+}

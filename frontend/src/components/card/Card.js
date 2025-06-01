@@ -18,8 +18,8 @@ const styleCard = {
   },
   maxWidth: '200px',
   maxHeight: '500px',
-  bgcolor: '#84592b',
-  border: '3px solid #442d1c',
+  bgcolor: '#726352',
+  border: '3px solid #726352',
   boxShadow: 24,
   borderRadius: '10px',
   padding: '20px',
@@ -33,7 +33,7 @@ const styleCard = {
       opacity: 0.9, // slightly faded
       transform: 'scale(1.08)', // increase size on hover
       transition: 'transform 0.2s, opacity 0.2s',
-      bgcolor: '#743014', // darken background on hover
+      bgcolor: '#726352', // darken background on hover
     },
   },
 };

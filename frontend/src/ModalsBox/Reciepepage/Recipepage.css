@@ -85,6 +85,7 @@
 /* Section buttons styles */
 .sectionbuttons {
     display: flex;
+    padding-top: 20px;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -95,8 +96,8 @@
 
 @media (max-width: 600px) {
     .sectionbuttons {
-        flex-direction: column-reverse;
-        gap: 10px;
+       
+        gap: 12px;
         width: 100%;
         align-items: center;
         margin: auto;

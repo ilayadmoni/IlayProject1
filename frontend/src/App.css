@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color:#E8D1A7; 
+  background-color:#f0efee;
   font-family: 'MyFont', sans-serif;
 }
 @font-face {
@@ -26,7 +26,7 @@ body {
   padding-bottom: 30px;
   text-align: center;
   font-size: 4rem; /* Desktop size */
-  color: #442D1C;
+  color: #4f5141;
   font-family: 'MyFont';
   display: flex;
   justify-content: center;

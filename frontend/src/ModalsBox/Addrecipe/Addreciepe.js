@@ -11,20 +11,25 @@ import {
   VisuallyHiddenInput
 } from './AddrecipeStyle';
 import axios from 'axios';
+import LoadingPage from '../../components/loading/Loadingpage';
+import { useNavigate } from 'react-router-dom';
 
 function Addrecipe({setModalopen,setSnackbar , ipServer,fetchRecipes}) {
 
+const navigate = useNavigate();
 const [recipeName, setRecipeName] = useState('');
 const [foodSupplies, setFoodSupplies] = useState('');
 const [orderRecipe, setOrderRecipe] = useState('');
 const [pictureOfRecipe, setPictureOfRecipe] = useState(null);
+const [loading, setLoading] = useState(false);
 
-  const handleSubmitpicture = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (!pictureOfRecipe || !recipeName || !foodSupplies || !orderRecipe ) {
       setSnackbar('אנא מלא את כל הפרטים', 'warning');
       return;
     }
+    setLoading(true);
     const formData = new FormData();
     formData.append('image', pictureOfRecipe);
     formData.append("RecipeName", recipeName);
@@ -41,13 +46,18 @@ const [pictureOfRecipe, setPictureOfRecipe] = useState(null);
       setModalopen(false);
       setSnackbar('המתכון נשלח בהצלחה', 'success');
       fetchRecipes();
+      
     } catch (error) {
       console.error('Upload failed:', error.response?.data || error.message);
       setModalopen(false);
       setSnackbar('תקלה! קיימת בעיית חיבור לשרת', 'error');
+    } finally {
+      setLoading(false);
+      navigate('/');
     }
   };
     return (
+    loading ? <LoadingPage /> : (
     <div className="bodystyle" >
       <div className='headerstyleAddreciepe'>הוספת מתכון</div>
       <TextField
@@ -96,12 +106,12 @@ const [pictureOfRecipe, setPictureOfRecipe] = useState(null);
         <Button
           sx={stylebuttonfieldfile}
           startIcon={<CheckCircleIcon />}
-          onClick={handleSubmitpicture}
+          onClick={handleSubmit}
         >שליחת מתכון</Button></div>
       
       <div className='rowbuttonstyleAddrecipebottom' />
     </div>
+    )
     )};
 
-  
   export default Addrecipe;

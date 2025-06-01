@@ -14,6 +14,8 @@ import {
 } from '../Addrecipe/AddrecipeStyle.js';
 import TextField from '@mui/material/TextField';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
+import LoadingPage from '../../components/loading/Loadingpage.js';
+import RedoTwoToneIcon from '@mui/icons-material/RedoTwoTone';
 
 
 const buttonmodestyle = {
@@ -22,29 +24,35 @@ const buttonmodestyle = {
   right: 0,
   height: ['60px', '70px', '50px'],        // smaller on mobile, bigger on desktop   // adjust width responsively
   fontSize: ['1.3rem', '1.15rem', '1.2rem'],
-  bgcolor: '#e8d1a7',
-  color: '#442d1c',
-  border: '3px solid #442d1c',
+  bgcolor: '#f0efee',
+  color: '#726352',
+  border: '3px solid #726352',
    fontFamily: 'Myfont',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: '12px',
   boxShadow: 24,
-  padding: 0,
+  padding: '0 8px',
   zIndex: 1100,
-  border: '2px solid #442d1c',
-  width: ['70vw', '70vw', '250px'],
+  minwidth: ['70vw', '70vw', '250px'],
   '@media (hover: hover)': {
     '&:hover': {
       opacity: 0.9, // slightly faded
       transform: 'scale(1.08)', // increase size on hover
       transition: 'transform 0.2s, opacity 0.2s',
-      bgcolor: '#9f9167', // darken background on hover
+      bgcolor: '#f0efee', // darken background on hover
     },
   },
   transition: 'transform 0.2s, opacity 0.2s', // smooth transition for hover
-
+  '& .MuiButton-startIcon + span': {
+    paddingLeft: '16px', // space between icon and text
+    paddingRight: '16px', // space after text
+  },
+  '& .MuiButton-endIcon + span': {
+    paddingLeft: '16px', // space before text
+    paddingRight: '16px', // space after text
+  },
 };
 
 
@@ -58,6 +66,7 @@ function Recipepage({ recipe, ipServer, handleDeleteRecipe , handleEditRecipe })
   const [foodSuppliesUpdate, setFoodSuppliesUpdate] = useState( recipe ? recipe.FoodSupplies : '');
   const [orderRecipeUpdate, setOrderRecipeUpdate] = useState(recipe ? recipe.OrderRecipe : '');
   const [pictureOfRecipeUpdate, setPictureOfRecipeUpdate] = useState(`${ipServer}/api/image/${recipe.ImageId}`);
+  const [loading, setLoading] = useState(false);
   
   if (!recipe) {
     return <div className="recipepage-container">No recipe selected.</div>;
@@ -66,6 +75,7 @@ function Recipepage({ recipe, ipServer, handleDeleteRecipe , handleEditRecipe })
   const [deletemode, setDeletemode] = useState(false);
   const [editmode, setEditmode] = useState(false);
   const handleDelete = async () => {
+    setLoading(true);
     const recipe_id_json = JSON.stringify({ recipe_id: recipe._id });
     console.log(`Deleting recipe: ${recipe_id_json}`);
     try {
@@ -79,14 +89,16 @@ function Recipepage({ recipe, ipServer, handleDeleteRecipe , handleEditRecipe })
       console.error('Error deleting recipe:', error);
       // Optionally, show an error snackbar here
     }
+    setLoading(false);
   }
 
   const handleEdit = async () => {
+    setLoading(true);
     const formData = new FormData();
     formData.append('_id', recipe._id);
     if(typeof(pictureOfRecipeUpdate) !== 'string') 
     {
-    formData.append('image', pictureOfRecipeUpdate);
+      formData.append('image', pictureOfRecipeUpdate);
     }
     formData.append("RecipeName", recipeNameUpdate);
     formData.append("FoodSupplies", foodSuppliesUpdate);
@@ -102,10 +114,15 @@ function Recipepage({ recipe, ipServer, handleDeleteRecipe , handleEditRecipe })
       handleEditRecipe();
     } catch (error) {
       console.error('Upload failed:', error.response?.data || error.message);
+    } finally {
+      setLoading(false);
     }
   }
 return (
-  !editmode ? (
+  loading ? (
+   <LoadingPage />
+  ) :
+  (!editmode ? (
     <div className="recipepage-container">
       
       <h1 className="recipepage-title">{recipe.RecipeName}</h1>
@@ -132,24 +149,22 @@ return (
               startIcon={<DeleteIcon/>}
               onClick={handleDelete}
                > אשר מחיקה</Button>
-            <Button 
-              sx={buttonmodestyle}
-              onClick={() => setDeletemode(false)} 
-              >חזרה </Button>
+          <Button 
+        sx={buttonmodestyle}
+        onClick={() => setDeletemode(false)} 
+        ><RedoTwoToneIcon/> </Button>
           
           </>
         ) : ( 
           <>
             <Button 
               sx={buttonmodestyle}
-              startIcon={<EditIcon/>}
               onClick={() => setEditmode(true)}
-               > עריכת המתכון </Button>
+               > <EditIcon/></Button>
             <Button 
               sx={buttonmodestyle}
-              startIcon={<DeleteIcon/>}
               onClick={() => setDeletemode(true)}
-               > מחיקת המתכון</Button>
+               > <DeleteIcon/> </Button>
           </>
         )}
       </div>
@@ -221,14 +236,13 @@ return (
       <Button 
         sx={buttonmodestyle}
         onClick={handleEdit} 
-        startIcon={<TaskAltIcon/>}
-        >עדכן מתכון </Button>
+        > <TaskAltIcon/> </Button>
         <Button 
         sx={buttonmodestyle}
         onClick={() => setEditmode(false)} 
-        >חזרה </Button></div>
+        ><RedoTwoToneIcon/> </Button></div>
     </div>
   )
-); }
+)); }
 
 export default Recipepage;

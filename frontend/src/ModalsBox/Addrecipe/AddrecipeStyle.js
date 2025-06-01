@@ -3,13 +3,13 @@ import { styled } from '@mui/material/styles';
 
 export const styletextheaderfield = {
   width: ['70vw', '70vw', '250px'],
-  bgcolor: '#e8d1a7',
-  border: '2px solid #442d1c',
+  bgcolor: '#f0efee',
+  border: '3px solid #4f5141',
   boxShadow: 24,
   borderRadius: '12px',
   mx: 'auto',
   '& .MuiInputLabel-root': {
-    color: '#442d1c',
+    color: '#4f5141',
     fontFamily: 'MyFont',
     fontSize: '20px',
     width: '100%',
@@ -36,8 +36,8 @@ export const styletextfield = {
   maxWidth: '550px',
   height: '200px',
   minHeight: '200px',
-  bgcolor: '#e8d1a7',
-  border: '2px solid #442d1c',
+  bgcolor: '#f0efee',
+  border: '3px solid #726352',
   boxShadow: 24,
   borderRadius: '12px',
   mx: 'auto',
@@ -73,9 +73,9 @@ export const styletextfield = {
 };
 
 export const stylebuttonfieldfile = {
-  bgcolor: '#e8d1a7',
-  color: '#442d1c',
-  border: '2px solid #442d1c',
+  bgcolor: '#f0efee',
+  color: '#4f5141',
+  border: '3px solid #4f5141',
   boxShadow: 24,
   borderRadius: '12px',
   fontSize: ['1.3rem', '1.15rem', '1.2rem'],
