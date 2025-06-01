@@ -12,9 +12,11 @@ import {
 } from './AddrecipeStyle';
 import axios from 'axios';
 import LoadingPage from '../../components/loading/Loadingpage';
+import { useNavigate } from 'react-router-dom';
 
 function Addrecipe({setModalopen,setSnackbar , ipServer,fetchRecipes}) {
 
+const navigate = useNavigate();
 const [recipeName, setRecipeName] = useState('');
 const [foodSupplies, setFoodSupplies] = useState('');
 const [orderRecipe, setOrderRecipe] = useState('');
@@ -44,12 +46,14 @@ const [loading, setLoading] = useState(false);
       setModalopen(false);
       setSnackbar('המתכון נשלח בהצלחה', 'success');
       fetchRecipes();
+      
     } catch (error) {
       console.error('Upload failed:', error.response?.data || error.message);
       setModalopen(false);
       setSnackbar('תקלה! קיימת בעיית חיבור לשרת', 'error');
     } finally {
       setLoading(false);
+      navigate('/');
     }
   };
     return (

@@ -24,9 +24,9 @@ const buttonmodestyle = {
   right: 0,
   height: ['60px', '70px', '50px'],        // smaller on mobile, bigger on desktop   // adjust width responsively
   fontSize: ['1.3rem', '1.15rem', '1.2rem'],
-  bgcolor: '#e8d1a7',
-  color: '#442d1c',
-  border: '3px solid #442d1c',
+  bgcolor: '#f0efee',
+  color: '#726352',
+  border: '3px solid #726352',
    fontFamily: 'Myfont',
   display: 'flex',
   alignItems: 'center',
@@ -35,14 +35,13 @@ const buttonmodestyle = {
   boxShadow: 24,
   padding: '0 8px',
   zIndex: 1100,
-  border: '2px solid #442d1c',
   minwidth: ['70vw', '70vw', '250px'],
   '@media (hover: hover)': {
     '&:hover': {
       opacity: 0.9, // slightly faded
       transform: 'scale(1.08)', // increase size on hover
       transition: 'transform 0.2s, opacity 0.2s',
-      bgcolor: '#9f9167', // darken background on hover
+      bgcolor: '#f0efee', // darken background on hover
     },
   },
   transition: 'transform 0.2s, opacity 0.2s', // smooth transition for hover

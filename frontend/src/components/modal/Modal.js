@@ -11,7 +11,7 @@ const styleBox = {
   left: '50%',
   transform: 'translateX(-50%)',
   width: '50vw', // Shrink width on desktop
-  bgcolor: '#84592b',
+  bgcolor: '#726352',
   border: '3px solid #442d1c',
   boxShadow: 24,
   borderRadius: '10px',
@@ -24,16 +24,16 @@ const styleBox = {
     width: '12px',
   },
   '&::-webkit-scrollbar-track': {
-    background: '#e8d1a7',
+    background: '#f0efee',
     borderRadius: '6px',
   },
   '&::-webkit-scrollbar-thumb': {
-    backgroundColor: '#442d1c',
+    backgroundColor: '#726352',
     borderRadius: '6px',
     border: '3px solid #e8d1a7',
   },
   '&::-webkit-scrollbar-thumb:hover': {
-    backgroundColor: '#6b3c1f',
+    backgroundColor: '#726352',
   },
 
   // ✅ Mobile-specific padding
@@ -53,9 +53,9 @@ const buttonclosestyle = {
   position: 'sticky',
   top: 0,
   left: 0,
-  bgcolor: '#e8d1a7',
-  color: '#442d1c',
-  border: '3px solid #442d1c',
+  bgcolor: '#f0efee',
+  color: '#726352',
+  border: '3px solid #726352',
   minWidth: '40px',
   height: '40px',
   display: 'flex',
@@ -74,7 +74,7 @@ const buttonclosestyle = {
       opacity: 0.9, // slightly faded
       transform: 'scale(1.08)', // increase size on hover
       transition: 'transform 0.2s, opacity 0.2s',
-      bgcolor: '#9f9167', // darken background on hover
+      bgcolor: '#b7b7b6', // darken background on hover
     },
   },
   transition: 'transform 0.2s, opacity 0.2s',
