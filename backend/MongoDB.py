@@ -12,7 +12,7 @@ class DB_Mongo:
     def __init__(self):
         # Read URI_MONGO from environment at instance creation time
         self.Uri = os.environ.get("URI_MONGO", "mongodb://localhost:27017/")
-        self.client = MongoClient(self.Uri)
+        self.client = MongoClient(self.Uri, tls=True, tlsAllowInvalidCertificates=True)
         self.db = self.client[self.DBName]
         self.fs = gridfs.GridFS(self.db ,collection="image_collection")
         self.RecipeCollection = self.db[self.CollectionName]
