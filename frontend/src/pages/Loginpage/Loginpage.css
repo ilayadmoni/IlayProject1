@@ -1,0 +1,53 @@
+/* Loginpage.css */
+.login-container {
+  max-width: 350px;
+  margin: 60px auto 0 auto;
+  background: #f0efee;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px 0 #bfa6a033;
+  padding: 32px 24px 24px 24px;
+  font-family: 'Myfont', Arial, sans-serif;
+  color: #726352;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 18px;
+  color: #4f5141;
+  text-align: center;
+}
+
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.MuiTextField-root {
+  background: #f8f5ef;
+  border-radius: 8px;
+}
+
+.MuiButton-root {
+  background: #99907f;
+  color: #f0efee;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px 0 #bfa6a033;
+  transition: background 0.2s, transform 0.2s;
+}
+.MuiButton-root:hover {
+  background: #726352;
+  transform: scale(1.04);
+}
+
+@media (max-width: 600px) {
+  .login-container {
+    margin: 24px 4px 0 4px;
+    padding: 18px 4px 12px 4px;
+  }
+}

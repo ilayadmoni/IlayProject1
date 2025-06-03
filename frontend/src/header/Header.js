@@ -5,6 +5,8 @@ import { bgcolor, borderColor, boxSizing, fontFamily, fontSize, gap, minWidth } 
 import { IconButton, Stack } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import HomeIcon from '@mui/icons-material/Home';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { getAuth, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -51,6 +53,11 @@ const iconButtonStyle = {
 
 function Header({handleOnClick}) {
     const navigate = useNavigate();
+    const handleLogout = async () => {
+      const auth = getAuth();
+      await signOut(auth);
+      navigate('/loginpage', { replace: true });
+    };
     return (
       <div className="headerstyle" style={{ position: 'relative' }}>
         <Button
@@ -62,6 +69,7 @@ function Header({handleOnClick}) {
         <Stack direction="row" spacing={1} sx={{ position: 'absolute', top: 8, right: 8, zIndex: 10 }}>
           <IconButton sx={iconButtonStyle} onClick={() => navigate('/aboutme')}><InfoIcon/></IconButton>
           <IconButton sx={iconButtonStyle} onClick={() => navigate('/') }><HomeIcon/></IconButton>
+          <IconButton sx={iconButtonStyle} onClick={handleLogout}><LogoutIcon/></IconButton>
         </Stack>
       </div>
     )
