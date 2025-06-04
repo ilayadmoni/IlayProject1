@@ -12,7 +12,10 @@ class DB_Mongo:
     def __init__(self):
         # Read URI_MONGO from environment at instance creation time
         self.Uri = os.environ.get("URI_MONGO", "mongodb://localhost:27017/")
-        self.client = MongoClient(self.Uri, tls=True, tlsAllowInvalidCertificates=True)
+        if self.Uri.startswith("mongodb+srv://") or "ssl=true" in self.Uri or "tls=true" in self.Uri:
+            self.client = MongoClient(self.Uri, tls=True, tlsAllowInvalidCertificates=True)
+        else:
+            self.client = MongoClient(self.Uri)
         self.db = self.client[self.DBName]
         self.fs = gridfs.GridFS(self.db ,collection="image_collection")
         self.RecipeCollection = self.db[self.CollectionName]
@@ -135,4 +138,9 @@ class DB_Mongo:
             return {'message': 'No changes made to the recipe.'}
 
 
+
+
+
+Mongo = DB_Mongo()
+Mongo.create_RecipeDB_if_not_exists()
 
