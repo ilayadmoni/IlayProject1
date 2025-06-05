@@ -95,3 +95,28 @@ export const VisuallyHiddenInput = styled('input')({
   whiteSpace: 'nowrap',
   width: 1,
 });
+
+
+export const stylebuttongroupfield = {
+  borderRadius: '12px',
+  width: ['30vw', '70vw', '120px'],
+  height: '50px',
+};
+
+
+export const styleToggleButton = {
+    display: 'flex',    
+    flex: 1,
+    width: '100%',
+    bgcolor: '#f0efee',
+    color: '#4f5141',
+    border: '3px solid #726352',
+    borderRadius: '12px',
+    cursor: 'pointer',
+    '&:hover': {
+      bgcolor: '#e8d1a7',
+    },
+    '&.Mui-selected': {
+      bgcolor: '#e8d1a7',
+    },
+  }

@@ -62,6 +62,8 @@ class DB_Mongo:
             'RecipeName': RecipeDetails[0],
             'FoodSupplies': RecipeDetails[1],
             'OrderRecipe': RecipeDetails[2],
+            'RecipeMode': RecipeDetails[3],
+            'UserId': RecipeDetails[4],
             'ImageId': FileId  
         }
         ResultRecipe = self.RecipeCollection.insert_one(MetadataRecipe)

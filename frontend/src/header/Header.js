@@ -9,9 +9,12 @@ import { getAuth, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import {  useState} from 'react';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import AddIcon from '@mui/icons-material/Add';
+import ExploreIcon from '@mui/icons-material/Explore';
+import EditDocumentIcon from '@mui/icons-material/EditDocument';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+
 
 
 const buttonstyle = {
@@ -42,6 +45,7 @@ const iconButtonStyle = {
   width: 44,
   height: 44,
   boxShadow: 2,
+  cursor: 'pointer',
   border: '3px solid #4f5141',
   marginLeft: 1,
   // Prevent background color change on mobile active/click
@@ -59,10 +63,26 @@ const iconButtonStyle = {
   },
 };
 
+const iconButtonProfileStyle = {
+  bgcolor: 'transparent',
+  color: '#4f5141',
+  borderRadius: '50%', // make it circular
+  width: 44,
+  height: 44,
+  cursor: 'pointer',
+  marginLeft: 1,
+  // Prevent background color change on mobile active/click
+  '@media (hover: hover) and (pointer: fine)': {
+    '&:hover': {
+      transform: 'scale(1.08)',
+      bgcolor: 'transparent',
+    },
+  },
+};
+
 
 function Header({handleOnClickAddrecipe,currentUser,setOpenUserProfile}) {
   const [openbutton, setOpenButton] = useState(false);
-  console.log(currentUser.photoURL);
     const navigate = useNavigate();
 
     const handleLogout = async () => {
@@ -76,43 +96,51 @@ function Header({handleOnClickAddrecipe,currentUser,setOpenUserProfile}) {
     }
     return (
       <div className="headerstyle" style={{ position: 'relative' }}>
-     
-        <Stack direction="row" spacing={1} sx={{ position: 'absolute', top: 8, right: 8, zIndex: 10 }}>
-         
-         
-         
-         {openbutton ? (  
-          <>
-            <IconButton 
-              sx={{ ...iconButtonStyle, cursor: 'pointer' }} 
-              onClick={() => setOpenButton(false)}
-              title="הסתר לחצנים" 
-            >
-              <ChevronRightIcon/>
-            </IconButton>
-            <IconButton 
-              sx={{ ...iconButtonStyle, cursor: 'pointer' }} 
+
+        <Stack direction="row" spacing={1} sx={{ position: 'absolute', top: 8, left: 8, zIndex: 10 }}>
+                <IconButton 
+              sx={{...iconButtonStyle }} 
               onClick={handleOnClickAddrecipe}
               title="הוסף מתכון" 
             >
-              <AddIcon/>
+              <EditDocumentIcon/>
             </IconButton>
+       
+          <IconButton 
+              sx={{...iconButtonStyle }} 
+              onClick={() => navigate('/') }
+              title="המתכונים שלי"
+            >
+              <MenuBookIcon/>
+            </IconButton>
+               <IconButton 
+              sx={{ ...iconButtonStyle }} 
+              onClick={() => navigate('/aboutme')}
+              title="מתכונים משותפים"
+            >
+              <ExploreIcon/>
+            </IconButton>
+     </Stack>
+        <Stack direction="column-reverse" spacing={1} sx={{ position: 'absolute', top: 8, right: 8, zIndex: 10, alignItems: 'center' }}>
+         {openbutton ? (  
+          <>
             <IconButton 
-              sx={{ ...iconButtonStyle, cursor: 'pointer' }} 
+              sx={{ ...iconButtonProfileStyle }} 
+              onClick={() => setOpenButton(false)}
+              title="הסתר לחצנים" 
+            >
+              <KeyboardArrowUpIcon/>
+            </IconButton>
+      
+            <IconButton 
+              sx={{ ...iconButtonStyle }} 
               onClick={() => navigate('/aboutme')}
               title="על הפרוייקט"
             >
               <InfoIcon/>
             </IconButton>
             <IconButton 
-              sx={{ ...iconButtonStyle, cursor: 'pointer' }} 
-              onClick={() => navigate('/') }
-              title="דף הבית"
-            >
-              <HomeIcon/>
-            </IconButton>
-            <IconButton 
-              sx={{ ...iconButtonStyle, cursor: 'pointer' }} 
+              sx={{ ...iconButtonStyle }} 
               onClick={handleLogout}
               title="יציאה מהחשבון"
             >
@@ -121,11 +149,11 @@ function Header({handleOnClickAddrecipe,currentUser,setOpenUserProfile}) {
           </>
          ) : (
            <IconButton 
-            sx={{ ...iconButtonStyle, cursor: 'pointer' }} 
+            sx={{ ...iconButtonProfileStyle }} 
             onClick={() => setOpenButton(true)}
             title="גלה לחצנים"
           >
-            <ChevronLeftIcon/>
+            <KeyboardArrowDownIcon/>
           </IconButton>
          )}
          

@@ -49,7 +49,7 @@ function AppRoutes({
     });
     return () => unsubscribe();
   }, []);
-  console.log('Current User:', currentUser.photoURL);
+  
 
   // Block all routes except /loginpage if not authenticated
   if (user === undefined) return null; // or a loading spinner

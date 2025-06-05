@@ -87,7 +87,11 @@ def handle_RecipePost():
     if request.method == 'POST':
         
         #Collection data from Client
-        RecipeDetails = [request.form.get('RecipeName'),request.form.get('FoodSupplies'),request.form.get('OrderRecipe')]
+        RecipeDetails = [request.form.get('RecipeName'),
+                         request.form.get('FoodSupplies'),
+                         request.form.get('OrderRecipe'),
+                         request.form.get('RecipeMode'),
+                         request.form.get('UserId')]
         ImageFile = request.files.get('image') 
         
         #Adding Recipe to MongoDB
