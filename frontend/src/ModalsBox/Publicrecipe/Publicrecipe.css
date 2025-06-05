@@ -1,0 +1,154 @@
+/* Make the recipe name large and centered */
+.publicrecipe-title {
+    font-size: 40px;
+    font-weight: bold;
+    padding-bottom: 1%;
+    text-align: center;
+    margin: -10px 0 16px 0;
+    color: #e8d1a7;
+    font-family: 'MyFont', sans-serif;
+}
+
+/* Center the headers */
+.publicrecipe-section h2 {
+    text-align: center;
+    color: #e8d1a7;
+    font-size: 30px;
+    margin-bottom: 1px;
+    font-family: 'MyFont';
+}
+
+/* Right-to-left for text blocks */
+.publicrecipe-supplies,
+.publicrecipe-order {
+    direction: rtl;
+    text-align: right;
+    color: #442D1c;
+    font-size: 20px;
+    margin: 0 0 16px 0;
+    white-space: pre-wrap;
+    font-family: 'Myfont';
+}
+
+.publicrecipe-container {
+    
+    margin-top: -45px; /* Only for desktop */
+    padding: 24px;
+    position: relative;
+     /* Needed for absolutely positioned children like the edit button */
+}
+
+@media (max-width: 1024px) {
+    .publicrecipe-container {
+        margin-top: -37px; /* Remove negative margin on tablets and smaller */
+    }
+}
+
+
+.publicrecipe-image-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.publicrecipe-image {
+    max-width: 90%;
+    max-height: 200px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(132,89,43,0.12);
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 600px) {
+    .publicrecipe-title {
+        font-size: 4rem;
+        padding-bottom: 2%;
+    }
+    .publicrecipe-section h2 {
+        font-size: 1.5rem;
+    }
+    .publicrecipe-supplies,
+    .publicrecipe-order {
+        font-size: 1rem;
+    }
+    .publicrecipe-container {
+        padding: 1px;
+        
+      
+        box-sizing: border-box;
+    }
+    .publicrecipe-image {
+        max-height: 150px;
+    }
+}
+
+/* Section buttons styles */
+.sectionbuttons {
+    display: flex;
+    padding-top: 20px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 40px;
+    gap: 12px;
+}
+
+@media (max-width: 600px) {
+    .sectionbuttons {
+       
+        gap: 12px;
+        width: 100%;
+        align-items: center;
+        margin: auto;
+        
+    }
+}
+
+.headerstyleAddreciepe1 {
+    font-size: 40px;
+    color: #e8d1a7;
+    font-family: 'MyFont';
+    text-align: center;
+
+}
+
+
+@media (max-width: 768px) {
+  .headerstyleAddreciepe1 {
+    font-size: 42px;
+  }
+  .rowtextstyleAddrecipe1 {
+    font-size: 24px;
+    text-align: center;
+  }
+
+
+}
+
+
+
+ .publicrecipe-container1 { 
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: -50px; /* Only for desktop */
+  padding: 2%;
+  box-sizing: border-box;
+  overflow-x: hidden; } 
+
+  .rowtextstyleAddrecipe1 {
+    display: flex;
+    color: #e8d1a7;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    width: 100%;
+    padding-top: 2%;
+}
+

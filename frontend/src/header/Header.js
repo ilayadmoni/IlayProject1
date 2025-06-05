@@ -17,27 +17,6 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 
 
-const buttonstyle = {
-  bgcolor: '#4f5141', // light brown background
-  color: '#f0efee', // light beige text color
-  height: ['50px', '55px', '50px'],        // smaller on mobile, bigger on desktop
-  minWidth: ['90px', '110px', '100px'],   // adjust width responsively
-  fontSize: ['1rem', '1.15rem', '1.2rem'], // font size smaller on mobile
-  padding: ['8px 16px', '10px 20px', '10px 24px'], // smaller padding on mobile
-  border: '3px solid #4f5141',
-  borderRadius: '12px',
-  fontFamily: 'Myfont',
-  '@media (hover: hover)': {
-    '&:hover': {
-      opacity: 0.9, // slightly faded
-      transform: 'scale(1.08)', // increase size on hover
-      transition: 'transform 0.2s, opacity 0.2s',
-      bgcolor: '#726352', // darken background on hover
-    },
-  },
-  transition: 'transform 0.2s, opacity 0.2s', // smooth transition for hover
-};
-
 const iconButtonStyle = {
   bgcolor: '#4f5141', // light brown background
   color: '#f0efee',
@@ -115,7 +94,7 @@ function Header({handleOnClickAddrecipe,currentUser,setOpenUserProfile}) {
             </IconButton>
                <IconButton 
               sx={{ ...iconButtonStyle }} 
-              onClick={() => navigate('/aboutme')}
+              onClick={() => navigate('/explore')}
               title="מתכונים משותפים"
             >
               <ExploreIcon/>

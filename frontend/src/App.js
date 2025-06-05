@@ -9,15 +9,19 @@ const IPServer = process.env.REACT_APP_BACKEND_URL || 'http://10.100.102.12:80';
 
 function App() {
 
+    // State variables
    const [openAddRecipe, setOpenAddRecipe] = useState(false);
    const [openUserProfile, setOpenUserProfile] = useState(false);
+   const [recipesPersonal, setRecipesPersonal] = useState([]);
+   const [user, setUser] = useState(undefined);
+   const [recipesPublic, setRecipesPublic] = useState([]);
    const [snackbar, setSnackbar] = useState({
       open: false,
       message: '',
       severity: 'success'
    });
-   const [recipes, setRecipes] = useState([]);
-   const [user, setUser] = useState(undefined);
+   
+   
 
    const SetSnackbarOpen = (message, severity) => {
      setSnackbar({ open: true, message, severity });
@@ -28,18 +32,33 @@ function App() {
    };
  
    const handleOnClickAdd = () =>  setOpenAddRecipe(true);
+   
  
- 
-   const fetchRecipes = async () => {
+   const fetchRecipesPersonal = async () => {
        const response = await axios.get(
-         `${IPServer}/api/recipes`
+         `${IPServer}/api/recipes/private/${user.uid}` // Fetch private recipes for the current user
        );
-       setRecipes(response.data);
+       setRecipesPersonal(response.data);
+     };
+
+
+    const fetchRecipesPublic = async () => {
+       const response = await axios.get(
+         `${IPServer}/api/recipes/public` 
+       );
+       setRecipesPublic(response.data);
      };
  
+     // Only try to fetch recipes if user is defined and has a uid
      useEffect(() => {
-       fetchRecipes()
-     }, []);
+       if (user && user.uid) {
+         fetchRecipesPersonal();
+          fetchRecipesPublic();
+       } else {
+         setRecipesPersonal([]);
+          setRecipesPublic();
+       }
+     }, [user]);
  
      useEffect(() => {
       const auth = getAuth();
@@ -60,9 +79,11 @@ function App() {
         SetSnackbarOpen={SetSnackbarOpen}
         handleCloseSnackbar={handleCloseSnackbar}
         handleOnClickAdd={handleOnClickAdd}
-        recipes={recipes}
-        IPServer={IPServer}
-        fetchRecipes={fetchRecipes}
+        recipesPersonal={recipesPersonal}
+        recipesPublic={recipesPublic}
+        fetchRecipesPersonal={fetchRecipesPersonal}
+        fetchRecipesPublic={fetchRecipesPublic}
+         IPServer={IPServer}
         user={user}
         setUser={setUser}
       />

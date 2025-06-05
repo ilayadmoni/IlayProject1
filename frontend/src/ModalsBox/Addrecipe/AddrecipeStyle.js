@@ -120,3 +120,41 @@ export const styleToggleButton = {
       bgcolor: '#e8d1a7',
     },
   }
+
+
+ export const buttonmodestyle = {
+  position: 'sticky',
+  top: 0,
+  right: 0,
+  height: ['60px', '70px', '50px'],        // smaller on mobile, bigger on desktop   // adjust width responsively
+  fontSize: ['1.3rem', '1.15rem', '1.2rem'],
+  bgcolor: '#f0efee',
+  color: '#726352',
+  border: '3px solid #726352',
+   fontFamily: 'Myfont',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: '12px',
+  boxShadow: 24,
+  padding: '0 8px',
+  zIndex: 1100,
+  minwidth: ['70vw', '70vw', '250px'],
+  '@media (hover: hover)': {
+    '&:hover': {
+      opacity: 0.9, // slightly faded
+      transform: 'scale(1.08)', // increase size on hover
+      transition: 'transform 0.2s, opacity 0.2s',
+      bgcolor: '#f0efee', // darken background on hover
+    },
+  },
+  transition: 'transform 0.2s, opacity 0.2s', // smooth transition for hover
+  '& .MuiButton-startIcon + span': {
+    paddingLeft: '16px', // space between icon and text
+    paddingRight: '16px', // space after text
+  },
+  '& .MuiButton-endIcon + span': {
+    paddingLeft: '16px', // space before text
+    paddingRight: '16px', // space after text
+  },
+};

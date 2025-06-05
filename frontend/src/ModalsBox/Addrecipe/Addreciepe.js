@@ -20,7 +20,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import PublicIcon from '@mui/icons-material/Public';
 import PersonIcon from '@mui/icons-material/Person';
 
-function Addrecipe({setModalopen,setSnackbar , ipServer,fetchRecipes,currentUser}) {
+function Addrecipe({setModalopen,setSnackbar , ipServer,fetchRecipes,currentUser,fetchRecipesPublic}) {
 
 
 const navigate = useNavigate();
@@ -63,6 +63,7 @@ const [loading, setLoading] = useState(false);
       setModalopen(false);
       setSnackbar('המתכון נשלח בהצלחה', 'success');
       fetchRecipes();
+      fetchRecipesPublic();
       
     } catch (error) {
       console.error('Upload failed:', error.response?.data || error.message);
@@ -91,7 +92,7 @@ const [loading, setLoading] = useState(false);
       onChange={handleChangeRecipeMode}
     >
       <ToggleButton 
-  value="Pubic"
+  value="Public"
   sx={styleToggleButton}
 >
   <PublicIcon/>

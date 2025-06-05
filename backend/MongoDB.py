@@ -110,6 +110,7 @@ class DB_Mongo:
             'RecipeName': RecipeDetails[1],
             'FoodSupplies': RecipeDetails[2],
             'OrderRecipe': RecipeDetails[3],
+            'RecipeMode': RecipeDetails[4],
         }
 
         # Handle image update
@@ -138,11 +139,31 @@ class DB_Mongo:
             return {'message': 'Recipe updated successfully.'}
         else:
             return {'message': 'No changes made to the recipe.'}
+    
+    # Function to get all recipes for a specific user by UserId
+    def get_recipes_by_userid(self, user_id):
+        try:
+            RecipeList = list(self.RecipeCollection.find({'UserId': user_id}))
+            for item in RecipeList:
+                item['_id'] = str(item['_id'])
+                item['ImageId'] = str(item['ImageId'])
+            return RecipeList
+        except Exception as e:
+            print(f"Error retrieving recipes for user {user_id}: {e}")
+            return []
 
-
-
-
+    # Function to get all recipes by Public RecipeMode 
+    def get_recipes_public(self):
+        try:
+            RecipeList = list(self.RecipeCollection.find({'RecipeMode': "Public"}))
+            for item in RecipeList:
+                item['_id'] = str(item['_id'])
+                item['ImageId'] = str(item['ImageId'])
+            return RecipeList
+        except Exception as e:
+            print(f"Error retrieving recipes for mode {'public'}: {e}")
+            return []
 
 Mongo = DB_Mongo()
-Mongo.create_RecipeDB_if_not_exists()
-
+a= Mongo.get_recipes_public()
+print(a)

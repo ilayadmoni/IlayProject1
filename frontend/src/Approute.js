@@ -12,6 +12,7 @@ import PrivateRoute from './pages/Loginpage/Privateroute'; // Import the Private
 import './App.css';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import UserInfo from './ModalsBox/Userinfo/Userinfo.js';
+import Explorepage from './pages/Explorepage/Explorepage.js';
 
 
 function AppRoutes({
@@ -23,11 +24,13 @@ function AppRoutes({
   SetSnackbarOpen,
   handleCloseSnackbar,
   handleOnClickAdd,
-  recipes,
+  recipesPersonal,
   IPServer,
-  fetchRecipes,
+  fetchRecipesPersonal,
   user,
-  setUser
+  setUser,
+  recipesPublic,
+  fetchRecipesPublic
 }) {
   const location = useLocation();
   const [currentUser, setCurrentUser] = useState({ uid: null, displayName: null, photoURL: null , email: null });
@@ -71,7 +74,8 @@ function AppRoutes({
                 setModalopen={setOpenAddRecipe}
                 setSnackbar={SetSnackbarOpen}
                 ipServer={IPServer}
-                fetchRecipes={fetchRecipes}
+                fetchRecipes={fetchRecipesPersonal}
+                fetchRecipesPublic={fetchRecipesPublic}
                 currentUser={currentUser}
               />}
             />
@@ -86,11 +90,21 @@ function AppRoutes({
                 <>
                   <div className='headertextstyle'>המתכונים שלי</div>
                   <Homepage 
-                    recipes={recipes}
+                    recipesPersonal={recipesPersonal}
                     ipServer={IPServer}
-                    fetchRecipes={fetchRecipes}
+                    fetchRecipes={fetchRecipesPersonal}
+                    fetchRecipesPublic={fetchRecipesPublic}
                     setSnackbar={SetSnackbarOpen}
                     currentUser={currentUser}
+                  />
+                </>
+              } />
+                <Route path="/explore" element={
+                <>
+                  <div className='headertextstyle'>מתכונים משותפים</div>
+                  <Explorepage 
+                    recipesPublic={recipesPublic}
+                    ipServer={IPServer}
                   />
                 </>
               } />
