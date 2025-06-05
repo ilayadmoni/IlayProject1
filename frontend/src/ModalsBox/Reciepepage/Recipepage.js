@@ -10,64 +10,29 @@ import {
   styletextheaderfield,
   styletextfield,
   stylebuttonfieldfile,
-  VisuallyHiddenInput
+  VisuallyHiddenInput,
+  buttonmodestyle,
+  stylebuttongroupfield,
+  styleToggleButton
 } from '../Addrecipe/AddrecipeStyle.js';
 import TextField from '@mui/material/TextField';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import LoadingPage from '../../components/loading/Loadingpage.js';
 import RedoTwoToneIcon from '@mui/icons-material/RedoTwoTone';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import PublicIcon from '@mui/icons-material/Public';
+import PersonIcon from '@mui/icons-material/Person';
 
-
-const buttonmodestyle = {
-  position: 'sticky',
-  top: 0,
-  right: 0,
-  height: ['60px', '70px', '50px'],        // smaller on mobile, bigger on desktop   // adjust width responsively
-  fontSize: ['1.3rem', '1.15rem', '1.2rem'],
-  bgcolor: '#f0efee',
-  color: '#726352',
-  border: '3px solid #726352',
-   fontFamily: 'Myfont',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  borderRadius: '12px',
-  boxShadow: 24,
-  padding: '0 8px',
-  zIndex: 1100,
-  minwidth: ['70vw', '70vw', '250px'],
-  '@media (hover: hover)': {
-    '&:hover': {
-      opacity: 0.9, // slightly faded
-      transform: 'scale(1.08)', // increase size on hover
-      transition: 'transform 0.2s, opacity 0.2s',
-      bgcolor: '#f0efee', // darken background on hover
-    },
-  },
-  transition: 'transform 0.2s, opacity 0.2s', // smooth transition for hover
-  '& .MuiButton-startIcon + span': {
-    paddingLeft: '16px', // space between icon and text
-    paddingRight: '16px', // space after text
-  },
-  '& .MuiButton-endIcon + span': {
-    paddingLeft: '16px', // space before text
-    paddingRight: '16px', // space after text
-  },
-};
-
-
-
-// Template for a recipe details page
-// Expects a 'recipe' prop with fields: RecipeName, ImageId, FoodSupplies, OrderRecipe
-// Expects an 'ipServer' prop for the image server URL
 function Recipepage({ recipe, ipServer, handleDeleteRecipe , handleEditRecipe }) {
 
   const [recipeNameUpdate, setRecipeNameUpdate] = useState(recipe ? recipe.RecipeName : '');
   const [foodSuppliesUpdate, setFoodSuppliesUpdate] = useState( recipe ? recipe.FoodSupplies : '');
   const [orderRecipeUpdate, setOrderRecipeUpdate] = useState(recipe ? recipe.OrderRecipe : '');
+  const [recipeModeUpdate, setRecipeModeUpdate] = useState(recipe ? recipe.RecipeMode : '');
   const [pictureOfRecipeUpdate, setPictureOfRecipeUpdate] = useState(`${ipServer}/api/image/${recipe.ImageId}`);
   const [loading, setLoading] = useState(false);
-  
+  console.log( recipe.RecipeMode);
   if (!recipe) {
     return <div className="recipepage-container">No recipe selected.</div>;
   }
@@ -103,7 +68,8 @@ function Recipepage({ recipe, ipServer, handleDeleteRecipe , handleEditRecipe })
     formData.append("RecipeName", recipeNameUpdate);
     formData.append("FoodSupplies", foodSuppliesUpdate);
     formData.append("OrderRecipe", orderRecipeUpdate);
-    console.log(pictureOfRecipeUpdate);
+    formData.append("RecipeMode" , recipeModeUpdate);
+  
 
     try {
       const response = await axios.post(`${ipServer}/editrecipe`,formData, {
@@ -178,6 +144,26 @@ return (
              value={recipeNameUpdate}
              onChange={(e) => setRecipeNameUpdate(e.target.value)}    
            />
+
+      <ToggleButtonGroup
+              sx={stylebuttongroupfield}
+              value={recipeModeUpdate}
+              exclusive
+              onChange={(e) => setRecipeModeUpdate(e.target.value)}
+            >
+            <ToggleButton 
+                value="Public"
+                sx={styleToggleButton}
+            >
+              <PublicIcon/>
+            </ToggleButton>
+            <ToggleButton
+                 value="Private"
+                 sx={styleToggleButton}
+           >
+               <PersonIcon/>
+            </ToggleButton>
+        </ToggleButtonGroup>
       <div className='rowtextstyleAddrecipe1'>מרכיבים למתכון</div>
       <TextField
               sx={styletextfield}

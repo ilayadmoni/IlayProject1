@@ -8,33 +8,50 @@ import {
   styletextheaderfield,
   styletextfield,
   stylebuttonfieldfile,
-  VisuallyHiddenInput
+  VisuallyHiddenInput,
+  stylebuttongroupfield,
+  styleToggleButton
 } from './AddrecipeStyle';
 import axios from 'axios';
 import LoadingPage from '../../components/loading/Loadingpage';
 import { useNavigate } from 'react-router-dom';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import PublicIcon from '@mui/icons-material/Public';
+import PersonIcon from '@mui/icons-material/Person';
 
-function Addrecipe({setModalopen,setSnackbar , ipServer,fetchRecipes}) {
+function Addrecipe({setModalopen,setSnackbar , ipServer,fetchRecipes,currentUser,fetchRecipesPublic}) {
+
 
 const navigate = useNavigate();
 const [recipeName, setRecipeName] = useState('');
 const [foodSupplies, setFoodSupplies] = useState('');
 const [orderRecipe, setOrderRecipe] = useState('');
 const [pictureOfRecipe, setPictureOfRecipe] = useState(null);
+const [recipeMode, setRecipeMode] = useState("Private");
 const [loading, setLoading] = useState(false);
+
+
+  const handleChangeRecipeMode = (event, mode) => {
+    setRecipeMode(mode);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!pictureOfRecipe || !recipeName || !foodSupplies || !orderRecipe ) {
+    if (!pictureOfRecipe || !recipeName || !foodSupplies || !orderRecipe || !recipeMode) {
       setSnackbar('אנא מלא את כל הפרטים', 'warning');
       return;
     }
+    console.log('recipeMode', recipeMode);
+    console.log(currentUser.uid);
     setLoading(true);
     const formData = new FormData();
     formData.append('image', pictureOfRecipe);
     formData.append("RecipeName", recipeName);
     formData.append("FoodSupplies", foodSupplies);
     formData.append("OrderRecipe", orderRecipe);
+    formData.append("RecipeMode", recipeMode);
+    formData.append("UserId", currentUser.uid);
     console.log('formData', formData);
      
     try {
@@ -46,6 +63,7 @@ const [loading, setLoading] = useState(false);
       setModalopen(false);
       setSnackbar('המתכון נשלח בהצלחה', 'success');
       fetchRecipes();
+      fetchRecipesPublic();
       
     } catch (error) {
       console.error('Upload failed:', error.response?.data || error.message);
@@ -56,6 +74,7 @@ const [loading, setLoading] = useState(false);
       navigate('/');
     }
   };
+  
     return (
     loading ? <LoadingPage /> : (
     <div className="bodystyle" >
@@ -66,6 +85,25 @@ const [loading, setLoading] = useState(false);
         value={recipeName}
         onChange={(e) => setRecipeName(e.target.value)}
       />
+        <ToggleButtonGroup
+      sx={stylebuttongroupfield}
+      value={recipeMode}
+      exclusive
+      onChange={handleChangeRecipeMode}
+    >
+      <ToggleButton 
+  value="Public"
+  sx={styleToggleButton}
+>
+  <PublicIcon/>
+</ToggleButton>
+      <ToggleButton
+       value="Private"
+       sx={styleToggleButton}
+       >
+        <PersonIcon/>
+        </ToggleButton>
+    </ToggleButtonGroup>
       <div className='rowtextstyleAddrecipe'>מרכיבים למתכון</div>
       <TextField
         sx={styletextfield}

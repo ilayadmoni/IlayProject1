@@ -87,7 +87,11 @@ def handle_RecipePost():
     if request.method == 'POST':
         
         #Collection data from Client
-        RecipeDetails = [request.form.get('RecipeName'),request.form.get('FoodSupplies'),request.form.get('OrderRecipe')]
+        RecipeDetails = [request.form.get('RecipeName'),
+                         request.form.get('FoodSupplies'),
+                         request.form.get('OrderRecipe'),
+                         request.form.get('RecipeMode'),
+                         request.form.get('UserId')]
         ImageFile = request.files.get('image') 
         
         #Adding Recipe to MongoDB
@@ -143,6 +147,7 @@ def handle_Recipeedit():
                          request.form.get('RecipeName'),
                          request.form.get('FoodSupplies'),
                          request.form.get('OrderRecipe'),
+                         request.form.get('RecipeMode')
                          ]
         
         ImageFile = request.files.get('image') 
@@ -160,7 +165,30 @@ def handle_Recipeedit():
             }
          )
         return response    
+
+
+@app.route('/api/recipes/private/<UserId>', methods=['GET'])
+@handle_cors
+@cross_origin(supports_credentials=True)
+def getRecipesbyUserId(UserId):
+    try:
+        return Mongo.get_recipes_by_userid(UserId)
+    except Exception as e:
+        return {"error": str(e)}, 500
     
+#Get api for giving list with all recipes details
+@app.route('/api/recipes/public', methods=['GET'])
+@handle_cors
+@cross_origin(supports_credentials=True)
+def getRecipesPublic():
+    try:
+        return Mongo.get_recipes_public()
+        
+    except Exception as e:
+        return {"error": str(e)}, 500
+    
+    
+        
 Mongo.create_RecipeDB_if_not_exists()
 if __name__ == '__main__':
    

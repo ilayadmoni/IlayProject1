@@ -12,7 +12,10 @@ class DB_Mongo:
     def __init__(self):
         # Read URI_MONGO from environment at instance creation time
         self.Uri = os.environ.get("URI_MONGO", "mongodb://localhost:27017/")
-        self.client = MongoClient(self.Uri, tls=True, tlsAllowInvalidCertificates=True)
+        if self.Uri.startswith("mongodb+srv://") or "ssl=true" in self.Uri or "tls=true" in self.Uri:
+            self.client = MongoClient(self.Uri, tls=True, tlsAllowInvalidCertificates=True)
+        else:
+            self.client = MongoClient(self.Uri)
         self.db = self.client[self.DBName]
         self.fs = gridfs.GridFS(self.db ,collection="image_collection")
         self.RecipeCollection = self.db[self.CollectionName]
@@ -59,6 +62,8 @@ class DB_Mongo:
             'RecipeName': RecipeDetails[0],
             'FoodSupplies': RecipeDetails[1],
             'OrderRecipe': RecipeDetails[2],
+            'RecipeMode': RecipeDetails[3],
+            'UserId': RecipeDetails[4],
             'ImageId': FileId  
         }
         ResultRecipe = self.RecipeCollection.insert_one(MetadataRecipe)
@@ -105,6 +110,7 @@ class DB_Mongo:
             'RecipeName': RecipeDetails[1],
             'FoodSupplies': RecipeDetails[2],
             'OrderRecipe': RecipeDetails[3],
+            'RecipeMode': RecipeDetails[4],
         }
 
         # Handle image update
@@ -133,6 +139,31 @@ class DB_Mongo:
             return {'message': 'Recipe updated successfully.'}
         else:
             return {'message': 'No changes made to the recipe.'}
+    
+    # Function to get all recipes for a specific user by UserId
+    def get_recipes_by_userid(self, user_id):
+        try:
+            RecipeList = list(self.RecipeCollection.find({'UserId': user_id}))
+            for item in RecipeList:
+                item['_id'] = str(item['_id'])
+                item['ImageId'] = str(item['ImageId'])
+            return RecipeList
+        except Exception as e:
+            print(f"Error retrieving recipes for user {user_id}: {e}")
+            return []
 
+    # Function to get all recipes by Public RecipeMode 
+    def get_recipes_public(self):
+        try:
+            RecipeList = list(self.RecipeCollection.find({'RecipeMode': "Public"}))
+            for item in RecipeList:
+                item['_id'] = str(item['_id'])
+                item['ImageId'] = str(item['ImageId'])
+            return RecipeList
+        except Exception as e:
+            print(f"Error retrieving recipes for mode {'public'}: {e}")
+            return []
 
-
+Mongo = DB_Mongo()
+a= Mongo.get_recipes_public()
+print(a)

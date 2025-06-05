@@ -4,7 +4,7 @@ import React, {useState, useEffect} from 'react';
 import ModalBox from '../../components/modal/Modal.js';
 import Recipepage from '../../ModalsBox/Reciepepage/Recipepage.js';
 
-function Homepage({ recipes, ipServer,fetchRecipes,setSnackbar }) {
+function Homepage({ recipesPersonal, ipServer,fetchRecipes,setSnackbar,fetchRecipesPublic }) {
   const [openRecipe, setOpenRecipe] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
 
@@ -18,18 +18,20 @@ function Homepage({ recipes, ipServer,fetchRecipes,setSnackbar }) {
     setOpenRecipe(false);
     setSnackbar('המתכון נמחק בהצלחה', 'success');
     await fetchRecipes();
+    await fetchRecipesPublic();
   }
 
   const handleEditRecipe = async () => {
     setOpenRecipe(false);
     setSnackbar('המתכון עודכן בהצלחה', 'success');
     await fetchRecipes();
+    await fetchRecipesPublic();
   }
  
   return (
     <div className="homepagestyle">
-      {recipes && recipes.length > 0 ? (
-        recipes.map((recipe, idx) => (
+      {recipesPersonal && recipesPersonal.length > 0 ? (
+        recipesPersonal.map((recipe, idx) => (
           <CardComponent
             key={recipe._id || idx}
             recipe={recipe}
