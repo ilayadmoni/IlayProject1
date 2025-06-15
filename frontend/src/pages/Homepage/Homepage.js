@@ -3,6 +3,7 @@ import CardComponent from '../../components/card/Card.js';
 import React, {useState, useEffect} from 'react';
 import ModalBox from '../../components/modal/Modal.js';
 import Recipepage from '../../ModalsBox/Reciepepage/Recipepage.js';
+import Firstlogin from './Firstlogin.js';
 
 function Homepage({ recipesPersonal, ipServer,fetchRecipes,setSnackbar,fetchRecipesPublic }) {
   const [openRecipe, setOpenRecipe] = useState(false);
@@ -29,18 +30,23 @@ function Homepage({ recipesPersonal, ipServer,fetchRecipes,setSnackbar,fetchReci
   }
  
   return (
-    <div className="homepagestyle">
+    <div>
       {recipesPersonal && recipesPersonal.length > 0 ? (
         recipesPersonal.map((recipe, idx) => (
+          <div className='homepagestylecards'>
           <CardComponent
             key={recipe._id || idx}
             recipe={recipe}
             IPServer={ipServer}
             handleCardClick={() => handleCardClick(recipe)}
           />
-        ))
+          </div>
+        )
+        )
       ) : (
-        <div>No recipes found.</div>
+        <div className="homepagestylestart">
+        <Firstlogin/>
+        </div>
       )}
       <ModalBox
         open={openRecipe}
@@ -52,7 +58,8 @@ function Homepage({ recipesPersonal, ipServer,fetchRecipes,setSnackbar,fetchReci
                          handleEditRecipe={handleEditRecipe}
                         />}
       />
-    </div>
+      </div>
+   
   );
 }
 

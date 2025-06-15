@@ -1,0 +1,53 @@
+.firstlogin-container {
+  max-width: 600px;
+  width: 90vw;
+  margin: 40px auto;
+  background: #e2dad2;
+  margin-top: 10px;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px 0 #f0efee;
+  padding: 32px 24px;
+  font-family: 'MyFont', Arial, sans-serif;
+  color: #726352;
+  direction: rtl;
+}
+
+.firstlogin-title {
+  color: #4f5141;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.firstlogin-message {
+  color: #726352;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  line-height: 1.7;
+  min-height: 120px; /* or your preferred static height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+@media (max-width: 600px) {
+  .firstlogin-container {
+    width: 98vw;
+    margin: 10px 1vw;
+    padding: 12px 4px;
+    border-radius: 10px;
+    min-height: 40vh;
+  }
+  .firstlogin-title {
+    font-size: 2rem;
+  }
+  .firstlogin-message {
+    font-size: 1rem;
+      
+    min-height: 200px;
+  }
+
+}

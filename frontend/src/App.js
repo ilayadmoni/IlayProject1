@@ -5,7 +5,7 @@ import { BrowserRouter as Router} from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import AppRoutes from './Approute'; // Import the PrivateRoute component
 
-const IPServer = process.env.REACT_APP_BACKEND_URL || 'http://10.100.102.12:80'; 
+const IPServer = process.env.REACT_APP_BACKEND_URL || 'http://10.100.102.6:80'; 
 
 function App() {
 
