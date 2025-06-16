@@ -40,17 +40,28 @@ const styleStepperButton = {
 };
 
 const stylemobile = {
-  bgcolor: '#e2dad2',
+  bgcolor: '#e5e0d8',
   color: '#4f5141',
+  width: { xs: '90%', sm: '80%' }, // 90vw on mobile, 50% on desktop
+  alignItems: 'center',
+  mx: 'auto', // Center horizontally in MUI
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'center',
+  '& .MuiMobileStepper-dot': {
+    backgroundColor: '#bfa6a0',
+  },
+  '& .MuiMobileStepper-dotActive': {
+    backgroundColor: '#4f5141',
+  },
 };
-
 const styleavatar = {
   display: 'block',
   marginLeft: 'auto',
   marginRight: 'auto',
   marginBottom: '16px',
-  width: { xs: 120, sm: 200 },
-  height: { xs: 120, sm: 200 },
+  width: { xs: 200, sm: 200 },
+  height: { xs: 200, sm: 200 },
 };
 
 function Firstlogin({ onCreateRecipe }) {
@@ -66,9 +77,15 @@ function Firstlogin({ onCreateRecipe }) {
 
 return (
     <div className="firstlogin-container">
-        <h1 className="firstlogin-title">ברוכים הבאים</h1>
+        <h1 className="firstlogin-title"> ברוכים הבאים לאתר "טעים לי טעים לך"</h1>
 
-        <Avatar
+      
+
+        <div className="firstlogin-message">
+  {activeStep === 0 && (
+    <> 
+    <div>
+     <Avatar
             sx={styleavatar}
             src="/favicon.ico"
             onError={(e) => {
@@ -76,29 +93,36 @@ return (
                 e.target.src = '/favicon.ico';
             }}
         />
-
-        <div className="firstlogin-message">
-  {activeStep === 0 && (
-    <>
-      עדיין לא יצרת מתכונים – וזה בדיוק הזמן להתחיל<br />
-      הגיע הרגע לכבוש את המטבח ולתת למתכונים שלך מקום משל עצמם<br /><br />
-      ברוכים הבאים ל<strong> "טעים לי טעים לך" </strong>
+      עדיין לא יצרת מתכונים – וזה בדיוק הזמן להתחיל
+      הגיע הרגע לכבוש את המטבח ולתת למתכונים שלך מקום משל עצמם
+    </div>
     </>
   )}
 
   {activeStep === 1 && (
     <>
-      בין אם זו שקשוקה שמסובבת ראשים, עוגת גבינה שממיסה לבבות<br />
+    <div>
+       <Avatar
+            sx={styleavatar}
+            src="/shakshuka.png"
+            onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = '/favicon.ico';
+            }}
+        />
+      בין אם זו שקשוקה שמסובבת ראשים, עוגת גבינה שממיסה לבבות
       או סלט שגורם לעשבי תיבול לקנא – זה המקום שלך<br /><br />
-      שתף, גלה, והתאהב מחדש בבישול הביתי
-    </>
+    </div> 
+   </>
   )}
 
   {activeStep === 2 && (
     <>
+    <div>
       תוכל לשמור מתכונים כפרטיים או לשתף אותם עם הקהילה<br />
       כל מתכון שתשתף יוכל לעזור לאחרים למצוא השראה<br /><br />
       בהצלחה – ותנו למתכון שלכם לזרוח ✨
+    </div>
     </>
   )}
 </div>
@@ -106,14 +130,15 @@ return (
 
         <MobileStepper
             variant="dots"
-            steps={3}
-            position="static"
+            className='firstlogin-stepper'
+            steps={5}
+            position='static'
             activeStep={activeStep}
             sx={stylemobile}
             nextButton={
                 <IconButton
                     onClick={handleNext}
-                    disabled={activeStep === 2}
+                    disabled={activeStep === 4}
                     sx={styleStepperButton}
                 >
                     <KeyboardArrowLeft />
@@ -129,13 +154,8 @@ return (
                 </IconButton>
             }
         />
+    
 
-        <IconButton
-            sx={stylebuttonaddrecipe1}
-            onClick={onCreateRecipe}
-        >
-            יצירת מתכון <EditDocumentIcon style={{ marginRight: '8px' }} />
-        </IconButton>
     </div>
 );
 }

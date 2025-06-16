@@ -1,22 +1,31 @@
 .firstlogin-container {
-  max-width: 600px;
-  width: 90vw;
-  margin: 40px auto;
-  background: #e2dad2;
-  margin-top: 10px;
-  border-radius: 18px;
-  box-shadow: 0 4px 24px 0 #f0efee;
-  padding: 32px 24px;
+  width: 550px;
+  margin: auto;
+  border: 3px solid #726352;
+  background-color: #e5e0d8;
+  box-shadow: 24;
+  border-radius: 20px;
+  padding: 0px 30px;
+  margin-top: 5px;
   font-family: 'MyFont', Arial, sans-serif;
   color: #726352;
   direction: rtl;
+  display: flex;
+  flex-direction: column;
+  
+  gap: 0; /* Ensure no gap between flex children */
 }
+
+.firstlogin-container > * {
+  margin: 0;
+  padding: 0;
+}
+
 
 .firstlogin-title {
   color: #4f5141;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 2rem;
-  margin-bottom: 0.5rem;
   text-align: center;
 }
 
@@ -25,8 +34,8 @@
   font-size: 1.1rem;
   margin-bottom: 2rem;
   text-align: center;
-  line-height: 1.7;
-  min-height: 120px; /* or your preferred static height */
+  line-height: 1.5;
+  min-height: 300px; /* or your preferred static height */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -35,19 +44,21 @@
 
 @media (max-width: 600px) {
   .firstlogin-container {
-    width: 98vw;
-    margin: 10px 1vw;
-    padding: 12px 4px;
-    border-radius: 10px;
-    min-height: 40vh;
+    width: 92vw;
+    margin-top: -30px;
+    padding: 10px 0px;
+    
   }
   .firstlogin-title {
-    font-size: 2rem;
+    font-size: 1rem;
+    font-weight: 700;
   }
   .firstlogin-message {
     font-size: 1rem;
-      
-    min-height: 200px;
+    min-height: auto;
+    height: 380px;
+    
   }
-
 }
+
+

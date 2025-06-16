@@ -101,7 +101,7 @@ function AppRoutes({
               } />
                 <Route path="/explore" element={
                 <>
-                  <div className='headertextstyle'>מתכונים משותפים</div>
+                  <div className='headertextstyleshare'>מתכונים משותפים</div>
                   <Explorepage 
                     recipesPublic={recipesPublic}
                     ipServer={IPServer}
