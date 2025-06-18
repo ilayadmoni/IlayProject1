@@ -1,6 +1,7 @@
 .bodystyle {
   display: flex;
   flex-direction: column;
+  margin-top: -10px;
   gap: 10px;
   width: 100%;
   max-width: 100%;
@@ -14,19 +15,24 @@
 
 @media (max-width: 1024px) {
   .bodystyle {
-    margin-top: 0; /* Remove negative margin on tablets and smaller */
+    margin-top: -30px; /* Remove negative margin on tablets and smaller */
+  }
+}
+@media (max-width: 600x) {
+  .bodystyle {
+    margin-top: -30px; /* Remove negative margin on tablets and smaller */
   }
 }
 
 .headerstyleAddreciepe {
     font-size: 40px;
-    color: #f0efee;
+    color: #725c3a;
     padding: 1%;
 
 }
 .rowtextstyleAddrecipe {
     display: flex;
-    color: #f0efee;
+    color: #725c3a;
     flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
@@ -37,7 +43,7 @@
 
 @media (max-width: 768px) {
   .headerstyleAddreciepe {
-    font-size: 32px;
+    font-size: 45px;
   }
 
   .rowtextstyleAddrecipe {

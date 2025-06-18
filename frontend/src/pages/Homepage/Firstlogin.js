@@ -77,7 +77,7 @@ function Firstlogin({ onCreateRecipe }) {
 
 return (
     <div className="firstlogin-container">
-        <h1 className="firstlogin-title"> ברוכים הבאים לאתר "טעים לי טעים לך"</h1>
+        <h1 className="firstlogin-title">  "טעים לי טעים לך"</h1>
 
       
 

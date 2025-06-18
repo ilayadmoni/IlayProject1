@@ -5,14 +5,14 @@
     padding-bottom: 1%;
     text-align: center;
     margin: -10px 0 16px 0;
-    color: #e8d1a7;
+    color: #725c3a;
     font-family: 'MyFont', sans-serif;
 }
 
 /* Center the headers */
 .recipepage-section h2 {
     text-align: center;
-    color: #e8d1a7;
+    color: #725c3a;
     font-size: 30px;
     margin-bottom: 1px;
     font-family: 'MyFont';
@@ -61,7 +61,7 @@
 /* Responsive styles for mobile devices */
 @media (max-width: 600px) {
     .recipepage-title {
-        font-size: 4rem;
+        font-size: 3rem;
         padding-bottom: 2%;
     }
     .recipepage-section h2 {
@@ -72,10 +72,14 @@
         font-size: 1rem;
     }
     .recipepage-container {
+        min-height: 80vh; /* Full viewport height */
+        display: flex;
+        flex-direction: column;
         padding: 1px;
-        
-      
+        margin-top: -10px;
         box-sizing: border-box;
+        
+    
     }
     .recipepage-image {
         max-height: 150px;
@@ -107,7 +111,7 @@
 
 .headerstyleAddreciepe1 {
     font-size: 40px;
-    color: #e8d1a7;
+    color: #725c3a;
     font-family: 'MyFont';
     text-align: center;
 
@@ -143,7 +147,7 @@
 
   .rowtextstyleAddrecipe1 {
     display: flex;
-    color: #e8d1a7;
+    color: #725c3a;
     flex-direction: row-reverse;
     justify-content: center;
     align-items: center;

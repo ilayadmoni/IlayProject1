@@ -84,7 +84,13 @@ function Header({handleOnClickAddrecipe,currentUser,setOpenUserProfile}) {
             >
               <EditDocumentIcon/>
             </IconButton>
-       
+                <IconButton 
+              sx={{ ...iconButtonStyle }} 
+              onClick={() => navigate('/explore')}
+              title="מתכונים משותפים"
+            >
+              <ExploreIcon/>
+            </IconButton>
           <IconButton 
               sx={{...iconButtonStyle }} 
               onClick={() => navigate('/') }
@@ -92,13 +98,7 @@ function Header({handleOnClickAddrecipe,currentUser,setOpenUserProfile}) {
             >
               <MenuBookIcon/>
             </IconButton>
-               <IconButton 
-              sx={{ ...iconButtonStyle }} 
-              onClick={() => navigate('/explore')}
-              title="מתכונים משותפים"
-            >
-              <ExploreIcon/>
-            </IconButton>
+         
      </Stack>
         <Stack direction="column-reverse" spacing={1} sx={{ position: 'absolute', top: 8, right: 8, zIndex: 10, alignItems: 'center' }}>
          {openbutton ? (  

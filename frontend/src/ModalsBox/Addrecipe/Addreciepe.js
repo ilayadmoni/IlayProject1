@@ -25,6 +25,7 @@ function Addrecipe({setModalopen,setSnackbar , ipServer,fetchRecipes,currentUser
 
 const navigate = useNavigate();
 const [recipeName, setRecipeName] = useState('');
+const [recipeDescription , setRecipeDescription] = useState('');
 const [foodSupplies, setFoodSupplies] = useState('');
 const [orderRecipe, setOrderRecipe] = useState('');
 const [pictureOfRecipe, setPictureOfRecipe] = useState(null);
@@ -52,6 +53,7 @@ const [loading, setLoading] = useState(false);
     formData.append("OrderRecipe", orderRecipe);
     formData.append("RecipeMode", recipeMode);
     formData.append("UserId", currentUser.uid);
+    formData.append("RecipeDescription", recipeDescription);
     console.log('formData', formData);
      
     try {
@@ -104,6 +106,18 @@ const [loading, setLoading] = useState(false);
         <PersonIcon/>
         </ToggleButton>
     </ToggleButtonGroup>
+        <TextField
+        sx={styletextheaderfield}
+        label={recipeDescription ? '' : "תיאור המתכון"}
+        value={recipeDescription}
+        onChange={(e) => setRecipeDescription(e.target.value)}
+      />
+      
+
+
+
+
+
       <div className='rowtextstyleAddrecipe'>מרכיבים למתכון</div>
       <TextField
         sx={styletextfield}

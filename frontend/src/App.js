@@ -64,6 +64,7 @@ function App() {
       const auth = getAuth();
       const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
         setUser(firebaseUser);
+      console.log(user);
       });
       return () => unsubscribe();
     }, []);

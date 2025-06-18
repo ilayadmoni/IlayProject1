@@ -4,12 +4,12 @@ import { styled } from '@mui/material/styles';
 export const styletextheaderfield = {
   width: ['70vw', '70vw', '250px'],
   bgcolor: '#f0efee',
-  border: '3px solid #4f5141',
+  border: '3px solid #725c3a',
   boxShadow: 24,
   borderRadius: '12px',
   mx: 'auto',
   '& .MuiInputLabel-root': {
-    color: '#4f5141',
+    color: '#725c3a',
     fontFamily: 'MyFont',
     fontSize: '20px',
     width: '100%',
@@ -74,8 +74,8 @@ export const styletextfield = {
 
 export const stylebuttonfieldfile = {
   bgcolor: '#f0efee',
-  color: '#4f5141',
-  border: '3px solid #4f5141',
+  color: '#725c3a',
+  border: '3px solid #725c3a',
   boxShadow: 24,
   borderRadius: '12px',
   fontSize: ['1.3rem', '1.15rem', '1.2rem'],
@@ -128,15 +128,14 @@ export const styleToggleButton = {
   right: 0,
   height: ['60px', '70px', '50px'],        // smaller on mobile, bigger on desktop   // adjust width responsively
   fontSize: ['1.3rem', '1.15rem', '1.2rem'],
-  bgcolor: '#f0efee',
+ 
   color: '#726352',
-  border: '3px solid #726352',
+  
    fontFamily: 'Myfont',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: '12px',
-  boxShadow: 24,
   padding: '0 8px',
   zIndex: 1100,
   minwidth: ['70vw', '70vw', '250px'],

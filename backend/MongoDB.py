@@ -8,6 +8,7 @@ class DB_Mongo:
     # Static variables for database name and collection name only
     DBName = "RecipeWebsite"
     CollectionName = "Recipe"
+    CollectionNameUsers = 'UsersDetails'
 
     def __init__(self):
         # Read URI_MONGO from environment at instance creation time
@@ -15,30 +16,47 @@ class DB_Mongo:
         if self.Uri.startswith("mongodb+srv://") or "ssl=true" in self.Uri or "tls=true" in self.Uri:
             self.client = MongoClient(self.Uri, tls=True, tlsAllowInvalidCertificates=True)
         else:
-            self.client = MongoClient(self.Uri)
+         self.client = MongoClient(self.Uri)
         self.db = self.client[self.DBName]
         self.fs = gridfs.GridFS(self.db ,collection="image_collection")
         self.RecipeCollection = self.db[self.CollectionName]
+        self.UsersDetails = self.db[self.CollectionNameUsers]
         
-
-    #Function which create db and collection if not exist 
+# Function which creates DB and collections if not exist
     def create_RecipeDB_if_not_exists(self):
-        db_list = self.client.list_database_names()
-        if self.DBName not in db_list:
-            RecipeDB = self.db
-            RecipeCollection = RecipeDB[self.CollectionName]
-            # Create collection by inserting a placeholder document then deleting it
-            RecipeCollection.insert_one({"_init": True})
-            RecipeCollection.delete_many({"_init": True})
-            print("Creating RecipeWebsite DB successfully")
-        else:
-            # Optional: make sure "reciepe" collection exists
-            RecipeDB = self.client[self.DBName]
-            if self.CollectionName not in RecipeDB.list_collection_names():
-                RecipeDB.create_collection(self.CollectionName)
-                print("Creating Recipe collection successfully")
-            else:
-                print("The DB and the Collection Recipe are already existed")    
+     db_list = self.client.list_database_names()
+
+     if self.DBName not in db_list:
+         RecipeDB = self.db
+
+         # Create Recipe collection
+         RecipeCollection = RecipeDB[self.CollectionName]
+         RecipeCollection.insert_one({"_init": True})
+         RecipeCollection.delete_many({"_init": True})
+         print("Creating RecipeWebsite DB and Recipe collection successfully")
+
+         # Create Users collection
+         UsersCollection = RecipeDB[self.UsersDetails]
+         UsersCollection.insert_one({"_init": True})
+         UsersCollection.delete_many({"_init": True})
+         print("Creating Users collection successfully")
+
+     else:
+         # If DB exists, check for each collection
+         RecipeDB = self.client[self.DBName]
+
+         if self.CollectionName not in RecipeDB.list_collection_names():
+             RecipeDB.create_collection(self.CollectionName)
+             print("Creating Recipe collection successfully")
+         else:
+             print("Recipe collection already exists")
+
+         if "Users" not in RecipeDB.list_collection_names():
+             RecipeDB.create_collection("Users")
+             print("Creating Users collection successfully")
+         else:
+             print("Users collection already exists")
+    
         
        
     #Function for display the image through API
@@ -64,6 +82,7 @@ class DB_Mongo:
             'OrderRecipe': RecipeDetails[2],
             'RecipeMode': RecipeDetails[3],
             'UserId': RecipeDetails[4],
+            'RecipeDescription': RecipeDetails[5],
             'ImageId': FileId  
         }
         ResultRecipe = self.RecipeCollection.insert_one(MetadataRecipe)
@@ -111,6 +130,7 @@ class DB_Mongo:
             'FoodSupplies': RecipeDetails[2],
             'OrderRecipe': RecipeDetails[3],
             'RecipeMode': RecipeDetails[4],
+            'RecipeDescription': RecipeDetails[5]
         }
 
         # Handle image update
@@ -163,7 +183,34 @@ class DB_Mongo:
         except Exception as e:
             print(f"Error retrieving recipes for mode {'public'}: {e}")
             return []
+        
+    def add_new_user_detail(self,userdetail):
+        try:  
+            userdetail = {
+                'UserUID': userdetail[0],
+                'UserName': userdetail[1],
+                'Email': userdetail[2],
+                'PhotoUrl': userdetail[3]
+            }
+            usersUID = [user["UserUID"] for user in self.UsersDetails.find({}, {"UserUID": 1, "_id": 0})]
+            if userdetail['UserUID'] not in usersUID:
+                 ResultUser = self.UsersDetails.insert_one(userdetail)
+            else:
+                print("The user is recognized by the system ")
+        
+           
+            print("test")
+        except Exception as e:
+            print(f"Error adding new user detail: {e}")
+        
+        
 
 Mongo = DB_Mongo()
-a= Mongo.get_recipes_public()
-print(a)
+userdetail_list = [
+    '1234115',                   # UserUID
+    'John Doe',                # UserName
+    'john.doe@example.com',    # Email
+    'https://example.com/photo.jpg'  # PhotoUrl
+]
+Mongo.add_new_user_detail(userdetail_list)
+

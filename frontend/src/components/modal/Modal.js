@@ -11,7 +11,7 @@ const styleBox = {
   left: '50%',
   transform: 'translateX(-50%)',
   width: '50vw', // Shrink width on desktop
-  bgcolor: '#726352',
+  bgcolor: '#e5e0d8',
   border: '3px solid #442d1c',
   boxShadow: 24,
   borderRadius: '10px',
@@ -53,16 +53,14 @@ const buttonclosestyle = {
   position: 'sticky',
   top: 0,
   left: 0,
-  bgcolor: '#f0efee',
-  color: '#726352',
-  border: '3px solid #726352',
+ 
+  color: '#442d1c',
   minWidth: '40px',
   height: '40px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: '12px',
-  boxShadow: 24,
   padding: 0,
   zIndex: 1100,
   '@media (max-width:480px)': {

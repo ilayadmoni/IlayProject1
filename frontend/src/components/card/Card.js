@@ -89,7 +89,7 @@ export default function CardComponent({ recipe, IPServer, handleCardClick }) {
         <CardContent sx={styleContent}>
           <h2 style={{ margin: 0 }}>{displayRecipe.RecipeName}</h2>
           <p style={{ margin: '8px 0', color: '#333', fontSize: '16px' }}>
-            {displayRecipe.Description || 'מתכון קל וטעים'}
+            {displayRecipe.RecipeDescription || 'מתכון קל וטעים'}
           </p>
           <Button sx={styleButton}>צפה במתכון</Button>
         </CardContent>

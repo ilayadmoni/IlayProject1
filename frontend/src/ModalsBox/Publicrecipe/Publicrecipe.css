@@ -5,14 +5,14 @@
     padding-bottom: 1%;
     text-align: center;
     margin: -10px 0 16px 0;
-    color: #e8d1a7;
+    color: #725c3a;
     font-family: 'MyFont', sans-serif;
 }
 
 /* Center the headers */
 .publicrecipe-section h2 {
     text-align: center;
-    color: #e8d1a7;
+    color: #725c3a;
     font-size: 30px;
     margin-bottom: 1px;
     font-family: 'MyFont';
@@ -96,18 +96,15 @@
 
 @media (max-width: 600px) {
     .sectionbuttons {
-       
-        gap: 12px;
-        width: 100%;
-        align-items: center;
-        margin: auto;
-        
-    }
+    gap: 12px;
+    width: 95%;
+    margin-top: auto;      
+    
 }
-
+}
 .headerstyleAddreciepe1 {
     font-size: 40px;
-    color: #e8d1a7;
+    color: #725c3a;
     font-family: 'MyFont';
     text-align: center;
 
@@ -143,7 +140,7 @@
 
   .rowtextstyleAddrecipe1 {
     display: flex;
-    color: #e8d1a7;
+    color: #725c3a;
     flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
