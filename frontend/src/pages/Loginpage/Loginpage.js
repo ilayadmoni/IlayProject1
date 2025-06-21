@@ -6,6 +6,7 @@ import { initializeApp } from 'firebase/app';
 import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import GoogleIcon from '@mui/icons-material/Google';
+import axios from 'axios';
 
 // Use your existing firebaseConfig
 const firebaseConfig = {
@@ -48,7 +49,7 @@ if (!window._firebaseInitialized) {
   window._firebaseInitialized = true;
 }
 
-function Loginpage() {
+function Loginpage({ipServer}) {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -60,6 +61,19 @@ function Loginpage() {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
+
+      const formData = new FormData();
+      formData.append("UserUID", auth.currentUser.uid);
+      formData.append("UserName", auth.currentUser.displayName);
+      formData.append("Email", auth.currentUser.email);
+      formData.append("PhotoUrl" , auth.currentUser.photoURL);
+
+      const response = await axios.post(`${ipServer}/addnewuser`,formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            });
+
       navigate('/'); // Redirect to home after successful login
     } catch (err) {
       setError(err.message);

@@ -24,6 +24,7 @@ function Aboutpage() {
           <li>Frontend: <a href="https://react.dev/" target="_blank" rel="noopener noreferrer">React.js</a></li>
           <li>Backend: <a href="https://flask.palletsprojects.com/" target="_blank" rel="noopener noreferrer">Python with Flask</a></li>
           <li>Database: <a href="https://www.mongodb.com/atlas" target="_blank" rel="noopener noreferrer">MongoDB Atlas</a></li>
+          <li>Authentication: <a href="https://firebase.google.com/products/auth" target="_blank" rel="noopener noreferrer">Firebase Authentication</a> (Google sign-in, secure user management)</li>
           <li>Version Control: <a href="https://git-scm.com/" target="_blank" rel="noopener noreferrer">Git</a> (code hosted on <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a>)</li>
         </ul>
         <h2>Deployment & Running:</h2>

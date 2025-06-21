@@ -184,6 +184,7 @@ class DB_Mongo:
             print(f"Error retrieving recipes for mode {'public'}: {e}")
             return []
         
+    # Function to add new user details to the UsersDetails collection 
     def add_new_user_detail(self,userdetail):
         try:  
             userdetail = {
@@ -198,13 +199,23 @@ class DB_Mongo:
             else:
                 print("The user is recognized by the system ")
         
-           
-            print("test")
         except Exception as e:
             print(f"Error adding new user detail: {e}")
+            
+    #Function to get user details by UserUID
+    def get_user_details_by_uid(self, user_uid):
+        try:
+            user = self.UsersDetails.find_one({'UserUID': user_uid})
+            if user:
+                user['_id'] = str(user['_id'])  # Convert ObjectId to string
+                return user
+            else:
+                return None 
+        except Exception as e:
+            print(f"Error retrieving user details by uid: {e}")
+            return None
         
         
-
 Mongo = DB_Mongo()
 userdetail_list = [
     '1234115',                   # UserUID
@@ -212,5 +223,5 @@ userdetail_list = [
     'john.doe@example.com',    # Email
     'https://example.com/photo.jpg'  # PhotoUrl
 ]
-Mongo.add_new_user_detail(userdetail_list)
+
 

@@ -148,7 +148,8 @@ def handle_Recipeedit():
                          request.form.get('RecipeName'),
                          request.form.get('FoodSupplies'),
                          request.form.get('OrderRecipe'),
-                         request.form.get('RecipeMode')
+                         request.form.get('RecipeMode'),
+                         request.form.get('RecipeDescription')
                          ]
         
         ImageFile = request.files.get('image') 
@@ -185,6 +186,49 @@ def getRecipesPublic():
     try:
         return Mongo.get_recipes_public()
         
+    except Exception as e:
+        return {"error": str(e)}, 500
+    
+
+# Adding userdetails to MongoDB
+@app.route('/addnewuser', methods=['POST', 'OPTIONS'])
+@handle_cors
+@cross_origin(supports_credentials=True)
+def handle_adduser():
+    if request.method == 'POST':
+        
+        RecipeDetails = [request.form.get('UserUID'),
+                      request.form.get('UserName'),
+                      request.form.get('Email'),
+                      request.form.get('PhotoUrl')]
+        
+        Mongo.add_new_user_detail(RecipeDetails)
+            
+
+        # Return success JSON
+        return jsonify({'message': 'Image received successfully'})
+    elif request.method == 'OPTIONS':
+       # Respond to the preflight request
+       response = app.response_class(
+            response='',
+            status=200,
+            headers={
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'POST, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type',
+            }
+         )
+    return response
+
+
+#Get api for user detail in client page from MongoDb
+@app.route('/api/userdetail/<UserUID>', methods=['GET'])
+@handle_cors
+@cross_origin(supports_credentials=True)
+def getUserDetail(UserUID):
+    try:
+        return Mongo.get_user_details_by_uid(UserUID)
+
     except Exception as e:
         return {"error": str(e)}, 500
     

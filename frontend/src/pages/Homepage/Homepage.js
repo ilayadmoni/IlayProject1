@@ -37,6 +37,7 @@ function Homepage({ recipesPersonal, ipServer,fetchRecipes,setSnackbar,fetchReci
           <CardComponent
             key={recipe._id || idx}
             recipe={recipe}
+            publicRecipe={false}
             IPServer={ipServer}
             handleCardClick={() => handleCardClick(recipe)}
           />

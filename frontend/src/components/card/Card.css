@@ -11,6 +11,35 @@
 /* Responsive styles for mobile */
 @media (max-width: 600px) {
     .ReciepeNamestyle {
-        font-size: 18px;
+        font-size: 16x;
     }
+    .styleauthorrecipe {
+        bottom: -36px; /* Adjust bottom position for mobile */
+        left: 60px; /* Push more to the left on mobile */
+    }
+    .styleauthorrecipe .MuiAvatar-root {
+        width: 28px !important;
+        height: 28px !important;
+    }
+    .styleauthorrecipe span {
+        font-size: 0.85rem !important;
+    }
+}
+
+
+
+.styleauthorrecipe {
+    position: absolute;
+    left: -10px;
+    bottom: -55px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 2;
+}
+
+/* Make sure the parent is positioned relative */
+.MuiCardContent-root {
+    position: relative;
+    padding-bottom: 40px; /* Ensure space for the author info */
 }

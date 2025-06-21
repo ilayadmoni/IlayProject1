@@ -2,7 +2,10 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color:#f0efee;
+  background-image: url('../public/background.png'); /* Replace with your image URL */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;    /* centers the image */
   font-family: 'MyFont', sans-serif;
 }
 @font-face {

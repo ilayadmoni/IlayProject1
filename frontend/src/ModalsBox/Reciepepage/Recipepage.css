@@ -61,7 +61,7 @@
 /* Responsive styles for mobile devices */
 @media (max-width: 600px) {
     .recipepage-title {
-        font-size: 3rem;
+        font-size: 2rem;
         padding-bottom: 2%;
     }
     .recipepage-section h2 {

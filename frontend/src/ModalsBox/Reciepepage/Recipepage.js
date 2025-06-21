@@ -26,13 +26,14 @@ import PersonIcon from '@mui/icons-material/Person';
 
 function Recipepage({ recipe, ipServer, handleDeleteRecipe , handleEditRecipe }) {
 
+
   const [recipeNameUpdate, setRecipeNameUpdate] = useState(recipe ? recipe.RecipeName : '');
+  const [recipeDescriptionUpdate, setRecipeDescriptionUpdate] = useState(recipe ? recipe.RecipeDescription : '');
   const [foodSuppliesUpdate, setFoodSuppliesUpdate] = useState( recipe ? recipe.FoodSupplies : '');
   const [orderRecipeUpdate, setOrderRecipeUpdate] = useState(recipe ? recipe.OrderRecipe : '');
   const [recipeModeUpdate, setRecipeModeUpdate] = useState(recipe ? recipe.RecipeMode : '');
   const [pictureOfRecipeUpdate, setPictureOfRecipeUpdate] = useState(`${ipServer}/api/image/${recipe.ImageId}`);
   const [loading, setLoading] = useState(false);
-  console.log( recipe.RecipeMode);
   if (!recipe) {
     return <div className="recipepage-container">No recipe selected.</div>;
   }
@@ -66,6 +67,7 @@ function Recipepage({ recipe, ipServer, handleDeleteRecipe , handleEditRecipe })
       formData.append('image', pictureOfRecipeUpdate);
     }
     formData.append("RecipeName", recipeNameUpdate);
+    formData.append("RecipeDescription" , recipeDescriptionUpdate);
     formData.append("FoodSupplies", foodSuppliesUpdate);
     formData.append("OrderRecipe", orderRecipeUpdate);
     formData.append("RecipeMode" , recipeModeUpdate);
@@ -164,6 +166,12 @@ return (
                <PersonIcon/>
             </ToggleButton>
         </ToggleButtonGroup>
+
+           <TextField
+             sx={styletextheaderfield}
+             value={recipeDescriptionUpdate}
+             onChange={(e) => setRecipeDescriptionUpdate(e.target.value)}    
+           />
       <div className='rowtextstyleAddrecipe1'>מרכיבים למתכון</div>
       <TextField
               sx={styletextfield}

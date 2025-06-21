@@ -62,7 +62,7 @@ function AppRoutes({
   }
   return (
     <Routes>
-      <Route path="/loginpage" element={<Loginpage />} />
+      <Route path="/loginpage" element={<Loginpage ipServer={IPServer} />} />
       <Route path="*" element={
         <PrivateRoute>
           <div className='bodystyleheader'>

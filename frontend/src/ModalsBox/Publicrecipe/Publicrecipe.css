@@ -61,7 +61,8 @@
 /* Responsive styles for mobile devices */
 @media (max-width: 600px) {
     .publicrecipe-title {
-        font-size: 4rem;
+        font-size: 2rem;
+        margin-top: 20px;
         padding-bottom: 2%;
     }
     .publicrecipe-section h2 {

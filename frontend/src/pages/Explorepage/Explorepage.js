@@ -23,6 +23,7 @@ function Explorepage({ recipesPublic, ipServer }) {
           <CardComponent
             key={recipe._id || idx}
             recipe={recipe}
+            publicRecipe={true}
             IPServer={ipServer}
             handleCardClick={() => handleCardClick(recipe)}
           />
